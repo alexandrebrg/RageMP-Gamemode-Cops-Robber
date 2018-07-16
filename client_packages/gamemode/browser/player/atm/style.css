@@ -1,0 +1,186 @@
+@font-face {
+	font-family: myFont;
+	src: url("./modern.ttf");
+}
+@font-face {
+	font-family: myFont2;
+	src: url("./modern2.ttf");
+}
+@font-face {
+	font-family: myFont3;
+	src: url('./modern3.ttf');
+}
+
+body {
+	font-family: myFont;
+}
+.box {
+	background-color: #00A664;
+	width: 1100px;
+	height: 550px;
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+	background-color: #F3F3F3;
+	height: 85px;
+	width: 100%;
+	color: #000;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.header .logo {
+	position: absolute;
+	width: 300px;
+	height: 100%;
+}
+.header img {
+	margin-left: 25px;
+	margin-top:15px;
+}
+.header .info {
+	position: relative;
+	float:right;
+	margin-right: 50px;
+	margin-top: 15px;
+}
+
+.header .info .head {
+	font-size: 30px;
+	text-align: right;
+}
+.header .info .sub {
+	font-size: 15px;
+}
+
+.header .hour {
+	width: 150px;
+	text-align: center;
+	position: relative;
+	margin-left: 475px;
+	padding-top: 25px;
+	font-size: 40px;
+}
+/** THE BODY **/
+.bodyMenu {
+	width: 100%;
+	color: #FFF;
+	height: 465px;
+	font-family: myFont2;
+	position: relative;
+}
+.bodyMenu .title {
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	padding-top: 10px;
+	font-size: 25px;
+}
+.bodyMenu .tiles {
+	width: 880px;
+	margin-left: 10%;
+}
+
+.bodyMenu .bigTile {
+	width: 290px;
+	height: 290px;
+	position: absolute;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+.bigTile .title {
+	font-size: 55px;
+	height: 200px;
+	margin-top: 50px;
+	position: absolute;
+}
+.bigTile .sub {
+	position: absolute;
+	bottom: 10px;
+	left: 125px;
+	font-family: myFont3;
+}
+.withdraw {	
+	background-color: #FEC627;
+}
+.transfer {
+	background-color: #E4E4E4;
+	margin-left: 295px;
+	color: #000;
+}
+.deposit {
+	background-color: #00B035;
+	margin-left: 590px;
+}
+.exit {
+	position: absolute;
+	bottom: 50px;
+	right: 525px;
+	padding: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	background-color: #FFF;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+.bodyWd {
+	width: 100%;
+	color: #FFF;
+	height: 465px;
+	font-family: myFont2;
+	position: relative;
+}
+.bodyWd .title {
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	padding-top: 10px;
+	font-size: 40px;
+	font-weight: 600;
+}
+.bodyWd .form {
+	width: 880px;
+	margin-left: 10%;
+}
+.bodyWd .form .button {
+	position: absolute;
+}
+.bodyWd .form .button input{
+	border:0;
+	padding:0;
+	line-height:1;
+
+	height: 62px;
+	width: 200px;
+	background-color: #E4E4E4;
+	font-family: myFont2;
+	font-size: 50px;
+	postion: inherit;
+	margin-left: 340px;
+	margin-top: 50px;
+	text-align: center;
+	
+}
+.bodyWd .form .button .minus {
+	margin-left: 260px;
+	margin-top: 49.5px;
+	width: 50px;
+	position: inherit;
+	border: 2px solid #E4E4E4;
+	padding: 5px;
+}
+.bodyWd .form .button .plus {
+	width: 50px;
+	position: absolute;
+	margin-top: 49.5px;
+	margin-left: 560px;
+	border: 2px solid #E4E4E4;
+	padding: 5px;
+}
+.bodyWd .form .validate {
+	margin-top: 200px;
+	margin-left: 355px;
+	padding: 10px;
+	border: none;
+	color: #000;
+	font-size: 40px;
+	font-family: myFont;
+}

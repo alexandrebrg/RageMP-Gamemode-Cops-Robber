@@ -1,0 +1,41 @@
+.box {
+    position:absolute;
+    bottom: 10%;
+    left:40%;
+    width: 20.8%;
+    height: 150px;
+}
+.boxs {
+    position:absolute;
+    bottom: 20%;
+    left:40%;
+    width: 20.8%;
+    height: 150px;
+}
+.leftArrow {
+    display: inline;
+}
+.leftArrow img {
+    transform: rotate(180deg);
+}
+.center {
+    display: inline;
+}
+.center img {
+    padding-bottom: 25px;
+}
+.rightArrow {
+    display: inline;
+}
+
+.error {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    background-color: rgba(250,116,6,0.7);
+    width: auto;
+    padding: 15px;
+    font-size: 15px;
+    bottom: 50%;
+    border-radius: 10px;
+    display:none;
+}

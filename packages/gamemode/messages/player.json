@@ -1,0 +1,22 @@
+{
+    "AccessVehicle": "!{#a70c0c} You don't have access to those vehicles !",
+    "AccessTP": "~r~(!) ~w~You don't have access to this teleporter!",
+    "AdminAccessVehicle": "!{#a70c0c} You don't have access to those vehicles, hopefully, you are admin !",
+    "NotEnoughCash": "~r~(!) ~w~You don't have enough cash for this!",
+    "NotEnoughBank": "~r~(!) ~w~You don't have enough in bank for this!",
+    "TransationDone": "~g~(!) ~w~Transation done!",
+    "ATMNegativ": "~r~(!) ~w~The amount cannot be negativ!",
+    "NotCop": "~r~(!) ~w~You can't perform this action as you are not in the police.",
+    "Syntax": "~HUD_COLOUR_MENU_STANDARD~ (Syntax) ~w~",
+    "cuffArgument": "/cuff [PLAYER ID]",
+    "PlayerNotFound": "~r~(!) ~w~Player not found!",
+    "PlayerCop": "~r~(!) ~w~You can't perform this action on a cop!",
+    "Myself": "~r~(!) ~w~You can't perform this action on yourself!",
+    "AlreadyCuffed": "~r~(!) ~w~Player already cuffed",
+    "IsInVehicle": "~r~(!) ~w~You can't be in a vehicle to do this",
+    "arrestArgument": "/arrest [PLAYER ID]",
+    "PlayerNotCuffed": "~r~(!) ~w~The player is not cuffed!",
+    "PV": "~r~(!) ~w~You can't arrest player with 1 star, just put a fine, with /fine",
+    "NotWanted": "~r~(!) ~w~This player is not wanted!",
+    "MustBeInVehicle": "~r~(!) ~w~You must be in a vehicle to do this!"
+}

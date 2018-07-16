@@ -1,0 +1,51 @@
+<html>
+    <body>
+        <link rel="stylesheet" href="./style.css">
+        <script src="../jquery.min.js"></script>
+        <div id="dialog-overlay"></div>
+        <div id="dialog-box">
+            <div id="modalTitle" class="dialog-title">
+                modalTitle
+            </div>
+            <div class="dialog-content">
+                <div id="dialog-message">fields</div>
+                <input type="button" value="Cancel" onclick="cancelForm();" />
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    function validateForm(type) {
+        mp.trigger("cSelectModalTreat", type);
+
+    }
+    function cancelForm() {
+        mp.trigger("cCancelModal");
+    }
+    //Popup dialog
+    function popup(message,args) {
+        // get the screen height and width  
+        var maskHeight = $(document).height() - 50;  
+        var maskWidth = $(window).width() - 50;
+
+        // calculate the values for center alignment
+        var dialogTop =  (maskHeight/3) - ($('#dialog-box').height());  
+        var dialogLeft = (maskWidth/2) - ($('#dialog-box').width()/2); 
+
+        // assign values to the overlay and dialog box
+        $('#dialog-overlay').css({height:maskHeight, width:maskWidth}).show();
+        $('#dialog-box').css({top:dialogTop, left:dialogLeft}).show();
+        $('#modalTitle').html(message);
+
+        message = ""
+        args.forEach(function(a) {
+            message = message + "<br/><input type=\"button\" OnClick=\"validateForm(\'" + a[1] + "\');\" value=\"" + a[0] + "\" />";
+        });
+        // display the message
+        $('#dialog-message').html(message);
+
+            
+    }
+
+</script>

@@ -1,0 +1,68 @@
+<html>
+    <body>
+        <link rel="stylesheet" href="./style.css">
+        <script src="../jquery.min.js"></script>
+        <div id="dialog-overlay"></div>
+        <div id="dialog-box">
+            <div id="modalTitle" class="dialog-title">
+                modalTitle
+            </div>
+            <div class="dialog-content">
+                <div id="dialog-desc">fields</div>
+                
+                <form id="forme" name="forme">
+                    <div id="dialog-message">fields</div>
+                    <input type="button" value="Validate" onclick="validateForm();" />
+                </form>
+                <input type="button" value="Cancel" onclick="cancelForm();" />
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    var typeModal;
+    function validateForm() {
+        var data = [];
+        var elem = document.getElementById('forme').elements;
+        for (var i = 0; i <elem.length; i++) {
+            if(elem[i]["value"] == "Validate") continue;
+            data[i] = elem[i]['value'];
+        };
+        mp.trigger("cModalTreat", typeModal, JSON.stringify(data));
+    }
+    function cancelForm() {
+        mp.trigger("cCancelModal");
+    }
+    //Popup dialog
+    function popup(type, message, desc,args) {
+        typeModal = type;
+        // get the screen height and width  
+        var maskHeight = $(document).height() - 50;  
+        var maskWidth = $(window).width() - 50;
+
+        // calculate the values for center alignment
+        var dialogTop =  (maskHeight/3) - ($('#dialog-box').height());  
+        var dialogLeft = (maskWidth/2) - ($('#dialog-box').width()/2); 
+
+        // assign values to the overlay and dialog box
+        $('#dialog-overlay').css({height:maskHeight, width:maskWidth}).show();
+        $('#dialog-box').css({top:dialogTop, left:dialogLeft}).show();
+        $('#modalTitle').html(message);
+
+        message = ""
+        args.forEach(function(a) {
+            message = message + "<br/><input type=\"text\" name=\"" + a[1] + "\"placeholder=\"" + a[0] + "\" ";
+            if(a[2]) {
+                message = message + ` value="${a[2]}" `;
+            }
+            message = message + ` required />`;
+        });
+        // display the message
+        $('#dialog-message').html(message);
+        $('#dialog-desc').html(desc);
+
+            
+    }
+
+</script>

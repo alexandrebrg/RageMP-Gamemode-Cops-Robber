@@ -1,0 +1,67 @@
+<html>
+	<link rel="stylesheet" href="style.css">
+	<body>
+		<div class="b-pos">
+			<div class="b">
+			<div class="b_title">Welcome!</div>
+			<div class="b_mess">
+				This name is available for registration<br>Please enter your email and password.
+			</div>
+			<input type="text" id="email" class="b_input" autofocus minlength="6"><br/>
+			<input type="password" id="password" class="b_input" autofocus>
+			<div class="b_reg-button" onclick="Reguser();">Sign up</div>
+				<div class="b_reg-button b_reg-button_green" id="success">Success! You can now play!</div>
+				<div class="b_reg-button b_reg-button_red" id="error">Email address already taken!</div>
+				<div class="b_reg-button b_reg-button_red" id="errorLength">Password must be at least 6 caracters!</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
+<script>
+let timeout = false;
+const error = get("error");
+const success = get("success");
+const errorLength = get("errorLength");
+const pass = get("password");
+const email = get("email");
+function get(id) {
+  return document.getElementById(id);
+}
+function Reguser() {
+	function clearTimeout() {
+		timeout = false;
+	}
+	if(timeout) {
+		return;
+	}
+	timeout = true;
+	if (pass.value != "" && email.value != "") {
+		mp.trigger("cTryRegister", pass.value, email.value);
+	};
+	pass.value="";
+	setTimeout(clearTimeout, 2000);
+};
+function showError() {
+	error.style.display = "block";
+	setTimeout(hideError, 4000);
+}
+function hideError() {
+	error.style.display = "none";
+}
+function showSuccess() {
+	success.style.display = "block";
+	setTimeout(hideSuccess, 2000);
+}
+function hideSuccess() {
+	success.style.display = "none";
+}
+function showErrorLength() {
+	errorLength.style.display = "block";
+	setTimeout(hideErrorLength, 4000);
+}
+function hideErrorLength() {
+	success.style.display = "none";
+}
+</script>

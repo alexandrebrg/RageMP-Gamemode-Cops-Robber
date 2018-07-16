@@ -1,0 +1,6 @@
+{
+    "NotEnoughRights": "<C>(!)</C> ~HUD_COLOUR_MENU_YELLOW_DARK~You haven't enough rights for this!",
+    "prefix": "!{#a70c0c}[ADMIN]: !{FF000}",
+    "syntax": "~HUD_COLOUR_MENU_STANDARD~ (Syntax) ~w~",
+    "prefixNotify": "~r~ADMIN: ~w~"
+}

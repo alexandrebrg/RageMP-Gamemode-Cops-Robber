@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ATM</title>
+    <!-- Bootstrap -->
+	<link href="./style.css" rel="stylesheet">
+
+  </head>
+  <body>
+  	<div id="box" class="box">
+		<div class="header">
+			<div class="logo">
+				<img src="../../images/fleeca.png" width="175px" />
+			</div>
+			<div class="info">
+				<div class="head">1100$</div>
+				<div class="sub">On your main account</div>
+			</div>
+			<div class="hour">
+				16:25
+			</div>
+		</div>
+  		<div class="bodyMenu" id="menu">
+  			<div class="title">
+				Hello, <b>xPtdrdu63</b>, what can I do for you ?
+  			</div>
+  			<div class="tiles">
+  				<div class="bigTile withdraw" OnClick="withdrawMenu();">
+  					<span class="title">Withdraw</span>
+  					<span class="sub"><img src="../../images/arrowup.png" width="40px;" style="color:#FFF;" /></span>
+  				</div>
+  				<div class="bigTile transfer" OnClick="transferMenu();">
+  					<span class="title">Transfer</span>
+  					<span class="sub"><img src="../../images/transfer.png" width="40px;" style="color:#000;" /></span>
+  				</div>
+  				<div class="bigTile deposit" OnClick="depositMenu();">
+  					<span class="title">Deposit</span>
+  					<span class="sub"><img src="../../images/arrowdown.png" width="40px;" style="color:#FFF;" /></span>
+  				</div>
+  			</div>
+			<div class="exit" OnClick="exit()"><img src="../../images/logout.png" width="30px;" /> </div>
+  		</div>
+  		<div class="bodyWd" id="withdraw">
+  			<div class="title">
+				Withdraw
+  			</div>
+  			<div class="form">
+  				<div class="button">
+  					<img class="minus" OnClick="WithdrawEdit(false)" src="../../images/minus.png" />
+  					<img class="plus" OnClick="WithdrawEdit(true)" src="../../images/plus.png"/>
+  					<input id="moneyWithdraw" type="number" value="0" />
+				</div>
+				<input class="validate" OnClick="WithdrawValidate()" type="button" value="Validate"  />
+  			</div>
+			<div class="exit" OnClick="exit()"><img src="../../images/logout.png" width="30px;" /> </div>
+  		</div>
+  		<div class="bodyWd" id="deposit">
+  			<div class="title">
+				Deposit
+  			</div>
+  			<div class="form">
+  				<div class="button">
+  					<img class="minus" OnClick="DepositEdit(false)" src="../../images/minus.png" />
+  					<img class="plus" OnClick="DepositEdit(true)" src="../../images/plus.png"/>
+  					<input id="moneyDeposit" type="number" value="0" />
+				</div>
+				<input class="validate" OnClick="DepositValidate()" type="button" value="Validate"  />
+  			</div>
+			<div class="exit" OnClick="exit()"><img src="../../images/logout.png" width="30px;" /> </div>
+  		</div>
+  	</div>
+  
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+	<script src="../../jquery.min.js"></script>
+	<script>
+		$('#withdraw').hide();
+		$('#deposit').hide();
+		function exit() { mp.trigger("cATMExit"); }
+		function transferMenu() {}
+		function depositMenu() {
+			$('#menu').hide();
+			$('#deposit').fadeIn("slow");
+		}
+		function withdrawMenu() {
+			$('#menu').hide();
+			$('#withdraw').fadeIn("slow");
+		}
+		function WithdrawValidate() {
+			value = $('#moneyWithdraw').val();
+			mp.trigger("cATMTry", "withdraw", value);
+		}
+		function DepositValidate() {			
+			value = $('#moneyDeposit').val();
+			mp.trigger("cATMTry", "deposit", value);			
+		}
+		function WithdrawEdit(plus) {
+			if(plus) $('#moneyWithdraw').val( function(i, oldval) {return parseInt( oldval, 10) + 1000;});
+			if(!plus) $('#moneyWithdraw').val( function(i, oldval) {return parseInt( oldval, 10) - 1000;});
+		}
+		function DepositEdit(plus) {
+			if(plus) $('#moneyDeposit').val( function(i, oldval) {return parseInt( oldval, 10) + 1000;});
+			if(!plus) $('#moneyDeposit').val( function(i, oldval) {return parseInt( oldval, 10) - 1000;});
+		}
+		jQuery.fn.center = function(parent) {
+			if (parent) {
+				parent = this.parent();
+			} else {
+				parent = window;
+			}
+			this.css({
+				"position": "absolute",
+				"top": ((($(parent).height() - this.outerHeight()) / 2) + $(parent).scrollTop() + "px"),
+				"left": ((($(parent).width() - this.outerWidth()) / 2) + $(parent).scrollLeft() + "px")
+			});
+		return this;
+		}
+		$("#box").center(false);
+	</script>
+  </body>
+</html>

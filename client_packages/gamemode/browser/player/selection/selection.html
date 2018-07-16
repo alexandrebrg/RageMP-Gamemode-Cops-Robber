@@ -1,0 +1,84 @@
+<html>
+    <link rel="stylesheet" href="./style.css"/>
+    <body>
+            <div class="boxs">
+                <div class="leftArrow"><img OnClick="previousFaction()" width="30%" src="./arrow.png"/></div>
+                <div class="center"><img OnClick="select()" width="30%" src="./faction.png"/></div>
+                <div class="rightArrow"><img OnClick="nextFaction()" width="30%" src="./arrow.png"/></div>
+            </div>
+            <div class="box">
+                <div class="leftArrow"><img OnClick="setPed(actualPed - 1)" width="30%" src="./arrow.png"/></div>
+                <div class="center"><img OnClick="select()" width="35%" src="./select.png"/></div>
+                <div class="rightArrow"><img OnClick="setPed(actualPed + 1)" width="30%" src="./arrow.png"/></div>
+            </div>
+    <script>
+        var peds = [];
+        var actualPed;
+        var datas;
+        const error = get("error");
+        function get(id) {
+            return document.getElementById(id);
+        }
+        function select() {
+            mp.trigger("cSelectFaction", JSON.stringify(peds[actualPed]));
+        }
+
+        function nextFaction() { 
+            faction = peds[actualPed]["faction_id"];
+            for(var i=actualPed; i < peds.length; i++) {
+                if(peds[i]['faction_id'] == faction) continue;
+                setPed(i);
+                break;
+            }
+        }
+        function previousFaction() { 
+            faction = peds[actualPed]["faction_id"];
+            for(var i=actualPed; i > 0; i--) {
+                if(peds[i]['faction_id'] == faction) continue;
+                setPed(i);
+                break;
+            }
+        }
+
+
+        function showError() {
+            error.innerHTML = "You can't join this faction, see more in help menu!";
+            error.style.display = "block";
+            setTimeout(function() { error.style.display = "none"; }, 4000);
+        }
+        function setPed(id) {
+            if(id+1>peds.length && !peds[id]) id = 0;
+            if(id-1 < 0 && !peds[id]) id = peds.length-1;
+            mp.trigger("cSkinChange", peds[id]['hash']);
+            actualPed = id;
+            title = datas[peds[id]["faction_id"]]["name"];
+            switch(datas[peds[id]["faction_id"]]["name"]) {
+                case "Civil":
+                    title = "~w~" + title;
+                    break;
+                case "LSPD":
+                case "FIB":
+                    title = "~b~" + title;
+                    break;
+                case "SWAT":
+                    title = `~p~`  + title;
+                    break;
+                default:
+                    title = title;
+                    break;
+            }
+            mp.trigger("cPedTitle", title, datas[peds[id]["faction_id"]]["desc"], 0, false, true, 5000)
+        }
+
+        function setup(data) {
+            datas = data;
+            for(var i =1;i<data.length; i++) {
+                data[i]['peds'].forEach(d => {
+                    peds.push(d);
+                });
+            }
+            setPed(0);
+        }
+    </script>
+    </body>
+</html>

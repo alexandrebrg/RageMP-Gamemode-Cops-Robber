@@ -12,6 +12,9 @@ let robberyBar = null;
 let interval = null;
 
 mp.events.add({
+    "setWaypoint": (x, y) => {
+        mp.game.ui.setNewWaypoint(x, y);
+    },
     "fadeOut": () => {
         mp.game.cam.doScreenFadeOut(500);
     },

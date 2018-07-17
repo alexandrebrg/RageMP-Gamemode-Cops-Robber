@@ -478,5 +478,23 @@ module.exports.Init = function() {
         });
         Labels.createLabelOffline("Press ~b~Y~w~ to enter in the ~p~Custom", new mp.Vector3(custom.Position.x, custom.Position.y, custom.Position.z ), Config.defaultDimension);
     };
+
+    for(var key in Config.CarShop) {
+        if(typeof Config.CarShop[key].Position == "undefined") continue;
+        carshop = Config.CarShop[key];
+        marker = mp.markers.new(1, new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z -1), 3, {
+            color: [15,0,255, 125],
+            dimension: Config.defaultDimension
+        });
+        marker.carShop = true;
+        marker.carShopType = key;
+        blip = mp.blips.new(carshop.Blip, new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), {
+            dimension: Config.defaultDimension,
+            color: 4,
+            name: carshop.Name
+        });
+        Labels.createLabelOffline("Press ~b~Y~w~ to enter in the ~p~Shop", new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), Config.defaultDimension);
+    
+    }
   
 }

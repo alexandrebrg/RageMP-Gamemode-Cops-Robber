@@ -1,8 +1,9 @@
 var PM = require('../messages/player');
 var Veh_Hash = require('../data/vehicle_hashes');
-var Veh_prices = require('../data/custom_prices');
+var Custom_prices = require('../data/custom_prices');
 var Players = require('../modules/players')
 var Config = require('../data/config.json')
+var Veh_Prices = require('../data/vehicle_prices.json');
 
 module.exports = {
     "showVehicleCustom": (player, customID) => {
@@ -23,7 +24,7 @@ module.exports = {
             player.dimension = Math.floor(Math.random() * 1000)
             vehicle.dimension = player.dimension;
             
-            player.call("showVehicleCustomHUD", [Veh_Hash[vehicle.modelName], vehicle, Veh_prices]);
+            player.call("showVehicleCustomHUD", [Veh_Hash[vehicle.modelName], vehicle, Custom_prices]);
             player.call("fadeIn");
         }, 1000);
     },
@@ -52,6 +53,42 @@ module.exports = {
         }
     },
     "showVehicleShop": (player, type) => {
-        
+        data = Config.CarShop[type];
+        vehClass = Config.CarShop[type].Class
+        vehData = {};
+        for(var key in Veh_Hash) {
+            if(vehClass.indexOf(Veh_Hash[key].vehicleClass) == -1 || Veh_Hash[key].manufacturerName == "") continue;
+            delete Veh_Hash[key].mods;
+            delete Veh_Hash[key].bones;
+            Veh_Hash[key].price = !Veh_Prices[key] ? Config.CarShop[type].defaultPrice : Veh_Prices[key];
+            vehData[key] = Veh_Hash[key];
+        }
+        player.dimension = Math.random() * 10000;
+        vehFirstName = Config.CarShop[type]["Default"]
+        player.position = new mp.Vector3(data.Marker.x, data.Marker.y, data.Marker.z);
+
+        player.call("showVehicleShop", [ vehFirstName, JSON.stringify(vehData), JSON.stringify(data), type]);
+    },
+    "exitVehicleShop": (player) => {
+        player.dimension = Config.defaultDimension;
+    },
+    "buyVehicleShop": (player, type, vehicle) => {
+        vehicle = JSON.parse(vehicle);
+        if(vehicle.price < Players.getPlayerCash(player.ID)) {
+            mp.events.call("sCashUpdate", player, -vehicle.price);
+            randomPos = Config.CarShop[type].Park;
+            randomPos = randomPos[Math.floor(Math.random() * Object.keys(randomPos).length)];
+            vehicleBought = mp.vehicles.new(vehicle.model, new mp.Vector3(randomPos.x, randomPos.y, randomPos.z), {
+                numberPlate: "Civil",
+                dimension: Config.defaultDimension,
+                heading: randomPos.rz,
+                engine: false
+            });
+            vehicleBought.owner = player.name;
+            player.dimension = Config.defaultDimension;
+            player.call("exitVehicleShop")
+            player.call("ShowShardMessage", ["~g~Success!", "Your vehicle is waiting for you at the waypoint on your minimap!"])
+            player.call("setWaypoint", [randomPos.x, randomPos.y])
+        } else { player.notify(PM.VehicleBuyNotEnoughMoney); }
     }
 }

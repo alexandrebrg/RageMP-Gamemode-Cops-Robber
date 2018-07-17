@@ -50,5 +50,8 @@ module.exports = {
         for(var key in edits) {
             veh.setMod(parseInt(key), parseInt(edits[key]));
         }
+    },
+    "showVehicleShop": (player, type) => {
+        
     }
 }

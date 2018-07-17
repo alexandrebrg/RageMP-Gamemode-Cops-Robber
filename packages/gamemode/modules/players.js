@@ -291,8 +291,10 @@ module.exports.setXP = function(id, xp) {
  */
 module.exports.updateSpentTime = function() {
 
-    for(var i=0;i<PlayersOnline.length;i++) {
-        PlayersOnline[i].spenttime += 1;
+    for(var i=0; i<mp.players.length;i++) {
+        if(IsPlayerLogged(mp.players[i].ID)) {
+            PlayersOnline[ mp.players[i].ID ].spenttime += 1;
+        }
     }
     return PlayersOnline.length;
 }

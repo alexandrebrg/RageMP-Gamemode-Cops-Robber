@@ -12,6 +12,8 @@ const ItemsCollection = NativeUI.ItemsCollection;
 const Color = NativeUI.Color;
 const ListItem = NativeUI.ListItem;
 
+
+// VEHICLE CUSTOM
 var price = 0;
 var ui = null;
 var uiType = null;
@@ -282,7 +284,6 @@ function showSpecificMenu(type, name) {
     });
 }
 
-
 mp.events.add({
     "showVehicleCustomHUD": (vehData, vehicle, prices) => {
         if(vehData) {
@@ -321,5 +322,72 @@ mp.events.add({
     "payVehicleCustom": (vehicle, price) => {
         mp.events.callRemote('vehicleApplyVehicleCustom', vehicle, JSON.stringify(edits));
         mp.events.callRemote('playerPayVehicleCustom', price);
+    }
+});
+
+// CAR SHOP
+
+var cam = null;
+function carShopMenu(data, type, pos) {    
+    ui = new Menu(type, "", new Point(50, 50));  
+    var veh = [];
+    for(var key in data) {
+        veh.push(data[key]);
+        item = new UIMenuItem(
+            data[key].name,
+            "Type Enter to buy this " + type + "~n~Tip: Those vehicle are temporary and will disapear at each restart!"
+        );
+        item.SetRightLabel("$" + data[key].price)
+        ui.AddItem(item);
+    }  
+    ui.IndexChange.on( (index) => {
+        mp.players.local.vehicleShop.model = veh[index].hash;
+        mp.players.local.vehicleShop.price = veh[index].price;
+
+    });
+    ui.ItemSelect.on( (item) => {
+        mp.events.callRemote("buyVehicleShop", type, JSON.stringify({"model": mp.players.local.vehicleShop.model, "price": mp.players.local.vehicleShop.price}));
+    });
+    ui.MenuClose.on( () => {
+        if(mp.players.local.vehicleShop) {
+            exitCarShop();
+        }
+    });
+}
+function exitCarShop() {    
+    mp.players.local.vehicleShop.destroy();
+    delete mp.players.local.vehicleShop;
+    mp.events.callRemote("exitVehicleShop");
+    if(ui) ui.Close();
+    cam.setActive(false);
+    mp.game.cam.renderScriptCams(false, true, 0, true, true);
+    cam.destroy();
+    cam = null; 
+}
+
+
+mp.events.add({
+    "showVehicleShop": (vehFirstName, data, pos, type) => {
+        data = JSON.parse(data);
+        pos = JSON.parse(pos);
+
+        player = mp.players.local; 
+
+        player.vehicleShop = mp.vehicles.new(data[vehFirstName].hash, new mp.Vector3(pos.Position.x, pos.Position.y, pos.Position.z), {
+            numberPlate: "SHOP",
+            dimension: player.dimension,
+            heading: pos.Position.rz,
+            engine: true
+        });
+        player.vehicleShop.price = data[vehFirstName].price;
+
+        cam = mp.cameras.new("Camera", {x:pos.Position.x-5, y: pos.Position.y-5, z: pos.Position.z+2}, {x: 0, y: 0, z: pos.Position.rz}, 50);
+        cam.setActive(true);
+        cam.pointAt(player.vehicleShop.handle, 0,0,0, true) ;
+        mp.game.cam.renderScriptCams(true, false, 0, true, false);
+        carShopMenu(data, type, pos)        
+    },
+    "exitVehicleShop": () => {
+        exitCarShop();
     }
 })

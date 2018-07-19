@@ -12,6 +12,7 @@
   - Custom their car
   - Use teleporters
   - Withdraw / deposit from ATM
+  - Buy a vehicle from physics car shop
 4. What admins can do
   - Create a temporary vehicle
   - Create a vehicle

@@ -13,6 +13,7 @@
   - Use teleporters
   - Withdraw / deposit from ATM
   - Buy a vehicle from physics car shop
+  - Buy a Boat at Boat Shop
 4. What admins can do
   - Create a temporary vehicle
   - Create a vehicle

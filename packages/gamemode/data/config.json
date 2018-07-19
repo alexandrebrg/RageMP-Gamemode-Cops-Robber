@@ -92,7 +92,6 @@
           14
         ],
         "Default": "speeder",
-        "defaultPrice": 10000,
         "Name": "Boat Shop"
       },
       "CarPoor": {
@@ -114,8 +113,28 @@
         "Blip": 225,
         "Name": "Low Budget Car Shop",
         "Default": "windsor",
-        "defaultPrice": 25000,
         "Class": [3,1,2,4]
+      },
+      "Helicopter": {
+        "Position": {
+          "x": -733.88,
+          "y": -1457.3,
+          "z": 6.345,
+          "rz": -48.8759
+        },
+        "Marker": {
+          "x": -701.14587,
+          "y": -1418.4813,
+          "z": 5.00
+        },
+        "Park": {
+          "0": {"x":-722.856,"y":-1442.1547,"z":6.359, "rz": 136.354766},
+          "1": {"x":-744.63,"y":-1468.3011,"z":6.34,"rz":141.220}
+        },
+        "Blip": 43,
+        "Name": "Helicopter Shop",
+        "Default": "windsor",
+        "Class": [15]
       }
     }
   }

@@ -3,7 +3,8 @@ var Veh_Hash = require('../data/vehicle_hashes');
 var Custom_prices = require('../data/custom_prices');
 var Players = require('../modules/players')
 var Config = require('../data/config.json')
-var Veh_Prices = require('../data/vehicle_prices.json');
+var Car_Shop = require('../data/vehicle_shop.json');
+var Vehicle = require('../modules/vehicles')
 
 module.exports = {
     "showVehicleCustom": (player, customID) => {
@@ -55,19 +56,14 @@ module.exports = {
     "showVehicleShop": (player, type) => {
         data = Config.CarShop[type];
         vehClass = Config.CarShop[type].Class
-        vehData = {};
-        for(var key in Veh_Hash) {
-            if(vehClass.indexOf(Veh_Hash[key].vehicleClass) == -1 || Veh_Hash[key].manufacturerName == "") continue;
-            delete Veh_Hash[key].mods;
-            delete Veh_Hash[key].bones;
-            Veh_Hash[key].price = !Veh_Prices[key] ? Config.CarShop[type].defaultPrice : Veh_Prices[key];
-            vehData[key] = Veh_Hash[key];
+        vehData = [];
+        for(var i =0; i < vehClass.length; i++) {
+            vehData[ i ] = Car_Shop[ vehClass[i] ];
         }
         player.dimension = Math.random() * 10000;
-        vehFirstName = Config.CarShop[type]["Default"]
         player.position = new mp.Vector3(data.Marker.x, data.Marker.y, data.Marker.z);
 
-        player.call("showVehicleShop", [ vehFirstName, JSON.stringify(vehData), JSON.stringify(data), type]);
+        player.call("showVehicleShop", [ JSON.stringify(vehData), JSON.stringify(data), type]);
     },
     "exitVehicleShop": (player) => {
         player.dimension = Config.defaultDimension;
@@ -78,12 +74,7 @@ module.exports = {
             mp.events.call("sCashUpdate", player, -vehicle.price);
             randomPos = Config.CarShop[type].Park;
             randomPos = randomPos[Math.floor(Math.random() * Object.keys(randomPos).length)];
-            vehicleBought = mp.vehicles.new(vehicle.model, new mp.Vector3(randomPos.x, randomPos.y, randomPos.z), {
-                numberPlate: "Civil",
-                dimension: Config.defaultDimension,
-                heading: randomPos.rz,
-                engine: false
-            });
+            vehicleBought = Vehicle.createOwnedVehicle(vehicle.model, randomPos.x, randomPos.y, randomPos.z, randomPos.rz)
             vehicleBought.owner = player.name;
             player.dimension = Config.defaultDimension;
             player.call("exitVehicleShop")

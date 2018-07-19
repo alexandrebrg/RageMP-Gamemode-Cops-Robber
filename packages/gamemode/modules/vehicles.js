@@ -196,9 +196,19 @@ module.exports.createTempVehicle = function(name, posx, posy, posz, angle, color
     Vehicles[id].temp = true;
     Vehicles[id].setColor(color1);
     Vehicles[id].modelName = name;
-    return true;
+    return Vehicles[id];
 }
 
+module.exports.createOwnedVehicle = function(model, posx, posy, posz, angle) {
+    id = Vehicles.length;
+    Vehicles[id] = mp.vehicles.new(model, new mp.Vector3(posx, posy, posz), {
+        heading: angle,
+        dimension: Config.defaultDimension
+    });
+    Vehicles[id].owned = true;
+    Vehicles[id].faction_id = 1;
+    return Vehicles[id];
+}
 module.exports.createVehicle = function(name, faction_id, posx, posy, posz, angle, color1,color2, plate, locked, dimension) {
     DB.Handle.query(`INSERT INTO server_vehicles(faction_id, name, posx, posy, posz, angle, color1,color2, plate, locked, dimension) VALUES (
         ${faction_id},

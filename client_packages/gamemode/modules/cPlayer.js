@@ -190,15 +190,48 @@ mp.events.add({
         ui.ItemSelect.on(item => {
             switch(item.Text) {
                 case "Buy stuff":
+                    ui.Close();
+                    mp.events.call("247ItemsChoice");
                     break;
                 case "Hold up!":
                     mp.events.callRemote("sAction", 2, id);
                     break;
+                default:
+                    ui.Close();
+                    break;
             }
-            ui.Close();
-            ui = null;
-            mp.gui.chat.show(true);
         });
+        ui.MenuClose.on( () => {
+            mp.gui.chat.show(true);
+            ui = null;
+        })
+    },
+    "247ItemsChoice": () => {
+        mp.gui.chat.show(false);
+        ui = new NativeUI.Menu("24/7", "Select what you want to do!", new NativeUI.Point(50,200));
+        items = {
+            "Apple": {name:"Apple",desc:"Nice to get some health more!",price:"20",health:10},
+            "Chips": {name:"Chips",desc:"May make you fat!",price:"30",health:20},
+            "Bread": {name:"Bread",desc:"Bread, it's good, it's french, as the developer is!",price:"50",health:30}
+        }
+        for(var key in items) {
+            item = items[key];
+            fitem = new NativeUI.UIMenuItem(item.name, item.desc);
+            fitem.SetRightLabel("~g~$" + item.price);
+            ui.AddItem( fitem );
+        }
+        ui.ItemSelect.on ( (item, index) => {
+            for(var key in items) {
+                if(item.Text != key) continue;
+                mp.events.callRemote("sAction", 3, item.Text, items[key].price, items[key].health);
+                ui.Close();
+            }
+        });
+        ui.MenuClose.on( () => {
+            mp.gui.chat.show(true);
+            ui = null;
+        });
+
     },
 
 

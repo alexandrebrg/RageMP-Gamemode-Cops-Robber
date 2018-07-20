@@ -28,7 +28,7 @@ var Biz = function(id, type, name, posx, posy, posz, dimension) {
             this.color = [191,63,63,255];
             blipID = 110;
             break;
-        case 3:
+        default:
             this.name = "Type unknown";
             this.nameNotColored = "Unknown"
             this.color = [191,63,63,255];

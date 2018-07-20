@@ -3,6 +3,7 @@ var Bizs = require('../modules/business');
 var Players = require('../modules/players')
 var Logs  = require('../modules/logs');
 var Config = require('../data/config.json');
+var PM = require('../messages/player.json')
 
 module.exports = {
 
@@ -79,6 +80,13 @@ module.exports = {
                 break;
             case 2:
                 mp.events.call("PlayerRobberyStart", player, parseInt(args[0]));
+                break;
+            case 3:
+                if(parseInt(args[1]) < Players.getPlayerCash(player.ID)){
+                    player.health += player.health >= 100 ? 0 : args[2];
+                    mp.events.call("sCashUpdate", player, -args[1]);
+                    player.notify(`You bought <C>${args[0]}</C>, for ~g~$${args[2]}.`);                    
+                } else { player.notify(PM.NotEnoughCash)}
                 break;
         }
     },

@@ -62,11 +62,13 @@ module.exports = {
         player.call("playerDead");
     },
     "playerQuit" : (player, exitType, reason) => {
-        console.log(`Player ${player.name} left, ${exitType}, reason: ${reason}`);
-        Logs.Insert(`Player ${player.name} left the game (${exitType}), reason: ${reason}`);
-        Players.SavePlayerClass(player.ID);
-        Players.destroyBlip(player.ID);
-        Players.DeletePlayerClass(player.ID);
+        if(Players.IsPlayerLogged(player.ID)) {
+            console.log(`Player ${player.name} left, ${exitType}, reason: ${reason}`);
+            Logs.Insert(`Player ${player.name} left the game (${exitType}), reason: ${reason}`);
+            Players.SavePlayerClass(player.ID);
+            Players.destroyBlip(player.ID);
+            Players.DeletePlayerClass(player.ID);
+        }
     },
 
     //ACTIONS

@@ -9,8 +9,6 @@ var Timers = require('../modules/timers');
 var Teleporters = require('../modules/teleporters');
 var ATMs = require('../modules/atm')
 
-
-var cars = require('../data/vehicle_hashes');
 module.exports.ServerInit = function() {
     Players.Init();
 
@@ -31,6 +29,6 @@ module.exports.ServerInit = function() {
     Teleporters.Init();
 
     ATMs.Init();
-
+    
     console.log("Starter");
 }

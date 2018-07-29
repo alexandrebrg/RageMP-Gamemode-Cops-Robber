@@ -218,7 +218,7 @@ mp.events.add({
     "AmmunationItemsChoice": (weapons) => {
         weapons = JSON.parse(weapons);
         weaponName = Object.keys(weapons)[0]
-        var weapon = null;
+        var weapon = "Buy this weapon for ~g~$~w~" + weapons[Object.keys(weapons)[0]].price;
 
         mp.gui.chat.show(false);
 
@@ -260,7 +260,7 @@ mp.events.add({
                 mp.events.callRemote("sAction", 4,JSON.stringify(weapon));
             }
         });
-        ui.Close.on( () => {
+        ui.MenuClose.on( () => {
             ui = null;
             mp.gui.chat.show(true);
             camera.destroy(true);
@@ -290,7 +290,6 @@ mp.events.add({
             for(var key in items) {
                 if(item.Text != key) continue;
                 mp.events.callRemote("sAction", 3, item.Text, items[key].price, items[key].health);
-                ui.Close();
             }
         });
         ui.MenuClose.on( () => {

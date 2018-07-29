@@ -1,6 +1,10 @@
 {
     "1": {
         "gadget_parachute": {"displayName": "Parachute", "x":255.2501068,"y":-47.3397293,"z":71.53501892,"wx":256.1742248,"wy":-47.69913101,"wz":71.51448, "price": 1500, "hash": 4222310262, "ammo": 1},
-        "weapon_pumpshotgun": {"displayName": "Pump Shotgun","x": 254.8953704, "y":-48.2968139, "z":71.5729827, "wx":255.94386, "wy": -48.6289024, "wz": 71.57048, "price": 2500, "ammo": 20}
+        "weapon_sawnoffshotgun": {"displayName": "Sawed-Off Shotgun","x": 254.8953704, "y":-48.2968139, "z":71.5729827, "wx":255.94386, "wy": -48.6289024, "wz": 71.57048, "price": 2500, "hash": 2017895192, "ammo": 20},
+        "weapon_assaultrifle": {"displayName": "Assault Rifle", "x": 254.5932,"y": -49.24404,"z": 71.589866,"wx": 255.606, "wy": -49.672286,"wz": 71.57,"price": 2000, "hash": 3220176749, "ammo": 120},
+        "weapon_microsmg": {"displayName": "Micro SMG", "x": 255.489,"y": -47.0502,"z": 70.97444152,"wx": 256.32012939, "wy": -47.39588165,"wz": 70.94573974,"price": 2000, "hash": 324215364, "ammo": 200},
+        "weapon_pumpshotgun": {"displayName": "Pump Shotgun", "x":255.093627,"y":-48.163700,"z":71.04917,"wx":256.014343,"wy":-48.5526847,"wz":71.082511901855,"price":3000,"hash":487013001,"ammo":20},
+        "weapon_carbinerifle": {"displayName": "Carbine Rifle", "x":254.6359,"y":-49.191200,"z":71.068275,"wx":255.634811,"wy":-49.6508,"wz":71.036972,"price":2500,"hash":2210333304, "ammo":120}
     }
 }

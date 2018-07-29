@@ -216,6 +216,7 @@ mp.events.add({
         })
     },
     "AmmunationItemsChoice": (weapons) => {
+        if(!weapons) return mp.gui.chat.push("There is no weapon to sell here")
         weapons = JSON.parse(weapons);
         weaponName = Object.keys(weapons)[0]
         var weapon = "Buy this weapon for ~g~$~w~" + weapons[Object.keys(weapons)[0]].price;

@@ -1,0 +1,6 @@
+{
+    "1": {
+        "gadget_parachute": {"displayName": "Parachute", "x":255.2501068,"y":-47.3397293,"z":71.53501892,"wx":256.1742248,"wy":-47.69913101,"wz":71.51448, "price": 1500, "hash": 4222310262, "ammo": 1},
+        "weapon_pumpshotgun": {"displayName": "Pump Shotgun","x": 254.8953704, "y":-48.2968139, "z":71.5729827, "wx":255.94386, "wy": -48.6289024, "wz": 71.57048, "price": 2500, "ammo": 20}
+    }
+}

@@ -90,6 +90,14 @@ module.exports = {
                     player.notify(`You bought <C>${args[0]}</C>, for ~g~$${args[2]}.`);                    
                 } else { player.notify(PM.NotEnoughCash)}
                 break;
+            case 4:
+                weapon = JSON.parse(args[0]);
+                if(weapon.price < Players.getPlayerCash(player.ID)) {
+                    mp.events.call("sCashUpdate", player, -weapon.price);
+                    player.notify(`You bought <C>${weapon.displayName}</C>, for ~g~$${weapon.price}.`); 
+                    player.giveWeapon(weapon.hash, weapon.ammo);
+                } else { return player.notify(PM.NotEnoughCash); }
+                break;
         }
     },
 

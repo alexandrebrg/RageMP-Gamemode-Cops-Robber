@@ -1,14 +1,8 @@
-var Bizs = require('../modules/business');
-var ATMs = require ('../data/atm_pos.js');
 var Players = require('../modules/players');
 var PM = require('../messages/player.json')
 var Factions = require('../modules/factions')
+var Ammunation = require('../data/ammunation.json')
 
-function isInRange(point, pos, range) {
-    point = point.x + point.y + point.z;
-    pos = pos.x + pos.y + pos.z;
-    return (point - pos < range);
-}
 
 
 module.exports = {
@@ -23,7 +17,7 @@ module.exports = {
                             player.call("247choice", [b.sqlid]);
                             break;
                         case 2:
-                            player.call("AMMUNATIONchoice", [b.sqlid]);
+                            player.call("AMMUNATIONchoice", [b.sqlid, JSON.stringify(Ammunation[b.sqlid])]);
                             break;
                     }
                     return false;

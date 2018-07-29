@@ -10,6 +10,11 @@ var player = mp.players.local;
 let rewardBar = null;
 let robberyBar = null;
 let interval = null;
+let camera = null;
+
+let weaponName = null; // Ammunation stuff
+let IsInAmmunation = null;
+
 
 mp.events.add({
     "setWaypoint": (x, y) => {
@@ -134,7 +139,7 @@ mp.events.add({
             mp.gui.chat.show(true);
         });
     },    
-    "AMMUNATIONchoice": (id) => {
+    "AMMUNATIONchoice": (id, weapons) => {
         mp.gui.chat.show(false);
 
 
@@ -157,15 +162,19 @@ mp.events.add({
         ui.ItemSelect.on(item => {
             switch(item.Text) {
                 case "Buy weapons":
+                    ui.Close();
+                    mp.events.call("AmmunationItemsChoice", weapons);
                     break;
                 case "Hold up!":
+                    ui.Close();
                     mp.events.callRemote("sAction", 2, id);
                     break;
             }
-            ui.Close();
-            ui = null;
-            mp.gui.chat.show(true);
         });
+        ui.MenuClose.on( () => {
+            mp.gui.chat.show(true);
+            ui = null;
+        })
     },    
     "247choice": (id) => {
         mp.gui.chat.show(false);
@@ -205,6 +214,63 @@ mp.events.add({
             mp.gui.chat.show(true);
             ui = null;
         })
+    },
+    "AmmunationItemsChoice": (weapons) => {
+        weapons = JSON.parse(weapons);
+        weaponName = Object.keys(weapons)[0]
+        var weapon = null;
+
+        mp.gui.chat.show(false);
+
+
+        camera = mp.cameras.new('weapon', new mp.Vector3(weapons[weaponName].x, weapons[weaponName].y, weapons[weaponName].z), mp.game.cam.getGameplayCamRot(2), 45);
+        camera.setActive(true);
+        camera.pointAtCoord(weapons[weaponName].wx, weapons[weaponName].wy, weapons[weaponName].wz);
+
+        mp.game.cam.renderScriptCams(true, false, 0, true, false);
+        mp.players.local.freezePosition(true);
+
+        
+        ui = new NativeUI.Menu("Ammunation", "Buy the weapon you need", new NativeUI.Point(50, 50));
+        weaponsArray = [];
+        for(var key in weapons){
+            weaponsArray.push( weapons[key].displayName);
+        }
+        var item = new NativeUI.UIMenuListItem(
+            "Weapon",
+            "Select a weapon to buy !",
+            new NativeUI.ItemsCollection(weaponsArray)
+        );
+        ui.AddItem(item);
+        ui.ListChange.on( (UIMenuListItem, Index) => {
+            for(var key in weapons) {
+                if(weapons[key].displayName != weaponsArray[ Index ] ) continue;
+                weaponData = weapons[key];
+            }
+            camera.setCoord(weaponData.x, weaponData.y, weaponData.z);
+            camera.pointAtCoord(weaponData.wx, weaponData.wy, weaponData.wz);
+            item.Description = "Buy this weapon for ~g~$~w~" + weaponData.price; 
+            weapon = weaponData;
+        });
+        ui.AddItem( new NativeUI.UIMenuItem(
+            "Buy this weapon"
+        ));
+        ui.ItemSelect.on( (item, index) => {
+            if(item.Text == "Buy this weapon") {
+                mp.events.callRemote("sAction", 4,JSON.stringify(weapon));
+            }
+        });
+        ui.Close.on( () => {
+            ui = null;
+            mp.gui.chat.show(true);
+            camera.destroy(true);
+            camera = null;          
+        
+            mp.game.cam.renderScriptCams(false, false, 0, true, false);
+        
+            mp.players.local.freezePosition(false);
+        });
+        
     },
     "247ItemsChoice": () => {
         mp.gui.chat.show(false);

@@ -5,6 +5,7 @@
   - Hacking a ATM ( A JOB)
   - Earn XP from playing / Rob / Hack
   - Do a rob in a store (Ammunation / 24/7)
+  - Buy weapons in ammunation
 2. What Cops can do
   - Arrest a player
   - Be from SWAT or FBI

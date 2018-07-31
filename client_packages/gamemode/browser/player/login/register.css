@@ -1,0 +1,53 @@
+@font-face {
+    font-family: "HouseScript";
+    src: url(font.ttf);
+}
+
+
+body {
+  font: "HouseScript";
+ background: rgba(2, 47, 73, 0.5);
+}
+
+.logo {
+    width: 550px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+
+.block {
+  font: inherit;
+  width: 100%;
+  text-align: center;
+}
+
+.block .title {
+    font-family: "HouseScript";
+    color: #FFF;
+    font-size: 500%;
+    margin-top: 150px;
+}
+
+.block .text {
+    font-family: "HouseScript";
+    color: #FFF;
+    font-size: 250%;
+    margin-top: 40px;
+
+}
+
+.adresse {
+  color: #ff6100;
+}
+
+.menu {
+  font-size:125%;
+  width:250px;
+  height:60px;
+  margin-top: 50px;
+  background:#2a9e12;
+  text-align: center;
+  border: none;
+  color: #FFFFFF;
+}

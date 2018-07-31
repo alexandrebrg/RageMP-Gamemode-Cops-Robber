@@ -1,0 +1,109 @@
+@font-face {
+    font-family: "HouseScript";
+    src: url(font.ttf);
+}
+
+
+body {
+
+ font-family:'HouseScript';
+ background: rgba(2, 47, 73, 0.3);
+}
+
+
+.logo {
+    width: 550px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+
+.block {
+	width: 320px;
+	height: 420px;
+	background: #FFF;
+	margin: auto;
+	margin-top: 25px;
+}
+
+.title {	
+  font-size:250%;
+  color:#1c1d1e;
+  width: 130px;
+  margin: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.sepbar {
+	height: 1px;
+	width: 100%;
+	border-bottom: 1px solid #005;
+}
+
+.Input {
+  font: 'OpenSans';
+  width:250px;
+  height:60px;
+  text-align: center;
+  background: #ECF0F1;
+  font-size:120%;
+  color: #807F8D;
+  margin-left: 35px;
+  margin-top: 35px;
+  border: none;
+  border-bottom: 3px solid #000;
+}
+
+.Input:focus {
+  border: 3px solid #0061ff;
+}
+
+
+.loginButton {
+  font-size:125%;
+  width:250px;
+  height:60px;
+  margin-top: 50px;
+  margin-left: 35px;
+  background:#3498CC;
+  text-align: center;
+  border: none;
+  color: #FFFFFF;
+}
+
+
+.registerButton {
+  font-size:125%;
+  width:250px;
+  height:60px;
+  margin-top: 10px;
+  margin-left: 35px;
+  background:#587533;
+  text-align: center;
+  border: none;
+  color: #FFFFFF;
+}
+
+.errors {
+  display:none;
+  height: 50px;
+  width: 100%;
+  margin-top: 40px;
+  font-size: 30px;
+  font-family: sans-serif;
+  text-align: center;
+  padding-top: 20px;
+}
+.success{
+  background-color: #53ba53;
+}
+.error {
+  background-color: #a82323;
+}
+.defaultName {
+  background-color: #a82323;
+  font-size: 20px;
+}

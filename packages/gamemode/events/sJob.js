@@ -23,7 +23,6 @@ module.exports = {
         player.setXP(Players.getPlayerXP(player.ID));
     },
     "playerReady": (player) => {
-        // Sets the player's level to newLevel. (will also change player's XP)
         player.data.currentXP = 0;
         player.data.currentLevel = 1;
         player.setLevel = function(newLevel) {

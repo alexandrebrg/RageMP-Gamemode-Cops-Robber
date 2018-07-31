@@ -5,7 +5,7 @@ var Labels = require('../modules/labels')
 
 var PlayersOnline = [];
 
-var Player = function(sqlID, name, email, spenttime, access, cash, bank, wantedlevel, hacker) {
+var Player = function(sqlID, name, email, spenttime, access, cash, bank, wantedlevel, hacker, reseller) {
 
     this.sqlID = sqlID;
     this.name = name;
@@ -16,6 +16,7 @@ var Player = function(sqlID, name, email, spenttime, access, cash, bank, wantedl
     this.bank = bank;
     this.wantedlevel = wantedlevel;
     this.hacker = hacker;
+    this.reseller = reseller;
     
 
     this.blip = false;
@@ -342,7 +343,7 @@ module.exports.CreatePlayerClass = function(sqlid, name, email) {
     DB.Handle.query(`SELECT * from server_players WHERE id = ${sqlid}`, function(e, result){
         if(e) return console.log(e);
         result = result[0];
-        var playa = new Player(sqlid, name, email, result['spenttime'], [], result['cash'], result['bank'], result['wantedlevel'], result['hacker']);
+        var playa = new Player(sqlid, name, email, result['spenttime'], [], result['cash'], result['bank'], result['wantedlevel'], result['hacker'], result['reseller']);
         PlayersOnline [ playa.ID ] = playa;
         mp.players[playa.ID].ID = playa.ID;
         SetPlayerAccess(playa.ID);

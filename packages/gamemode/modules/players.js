@@ -255,10 +255,7 @@ module.exports.setPlayerJob = function(id, job) {
  * @param {int} id Player id
  */
 function getPlayerJobField(id) {
-    switch(PlayersOnline[id].job) {
-        case 0:
-            return "hacker";
-    }
+    return Config.Jobs[PlayersOnline[id].job].sqlfield;
 }
 
 module.exports.getPlayerJobField = getPlayerJobField;
@@ -435,7 +432,8 @@ module.exports.Init = function() {
         bank bigint NOT NULL DEFAULT 10000,
         wantedlevel int NOT NULL DEFAULT 0,
         jail INT NOT NULL DEFAULT 0,
-        hacker int NOT NULL DEFAULT 0
+        hacker int NOT NULL DEFAULT 0,
+        reseller INT NOT NULL DEFAULT 0
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;`, function() { } );
     DB.Handle.query("ALTER TABLE `server_players` ADD PRIMARY KEY (`id`);", function() { } );
     DB.Handle.query("ALTER TABLE `server_players` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;", function() { } );

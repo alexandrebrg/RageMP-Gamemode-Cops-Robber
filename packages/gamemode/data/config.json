@@ -5,6 +5,10 @@
     "storeType1Time": 60,
     "storeType2Time": 120,
     "storeCashPerSecond": 200,
+    "Jobs": {
+        "0": {"name":"Hacker", "description":"Hack stuff, hack the city", "badge": 4},
+        "1": {"name":"Reseller", "description":"Sell people's car, and get money for it!"}
+    },
     "Customs": {
       "0": {
         "Position": {"x": -361.2722,"y": -133.021697,"z": 38.27},

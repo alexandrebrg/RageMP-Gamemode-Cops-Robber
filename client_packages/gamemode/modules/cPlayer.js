@@ -95,6 +95,7 @@ mp.events.add({
             for(var key in jobs) {
                 if("Choose " + jobs[key].name != item.Text) continue;
                 mp.events.callRemote("sJobSelection", key);
+                job = key;
                 ui.Close();
             }
         });

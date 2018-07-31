@@ -19,5 +19,6 @@
     "PV": "~r~(!) ~w~You can't arrest player with 1 star, just put a fine, with /fine",
     "NotWanted": "~r~(!) ~w~This player is not wanted!",
     "MustBeInVehicle": "~r~(!) ~w~You must be in a vehicle to do this!",
-    "VehicleBuyNotEnoughMoney": "~r~(!) ~w~You don't have enough money for this vehicle"
+    "VehicleBuyNotEnoughMoney": "~r~(!) ~w~You don't have enough money for this vehicle",
+    "MustNotBeWanted": "~r~(!) ~w~You must be not wanted to kill yourself!"
 }

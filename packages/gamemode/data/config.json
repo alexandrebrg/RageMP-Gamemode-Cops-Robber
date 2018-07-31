@@ -6,8 +6,8 @@
     "storeType2Time": 120,
     "storeCashPerSecond": 200,
     "Jobs": {
-        "0": {"name":"Hacker", "description":"Hack stuff, hack the city", "badge": 4},
-        "1": {"name":"Reseller", "description":"Sell people's car, and get money for it!"}
+        "0": {"name":"Hacker", "description":"Hack stuff, hack the city", "badge": 4, "sqlfield": "hacker"},
+        "1": {"name":"Reseller", "description":"Sell people's car, and get money for it!", "badge": 12, "sqlfield": "reseller"}
     },
     "Customs": {
       "0": {

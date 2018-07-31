@@ -20,5 +20,9 @@ mp.events.add({
     },
     'cTryRegister' : (pass, email) => {
             mp.events.callRemote('sTryRegister', pass, email);
+    },
+    'cFromRegisterToLogin': () => {
+            mp.events.call("cCloseCef");
+            mp.events.call("cLoginUI");
     }
 });

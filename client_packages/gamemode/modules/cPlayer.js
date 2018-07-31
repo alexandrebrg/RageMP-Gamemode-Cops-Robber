@@ -13,7 +13,6 @@ let interval = null;
 let camera = null;
 
 let weaponName = null; // Ammunation stuff
-let IsInAmmunation = null;
 
 
 mp.events.add({
@@ -75,29 +74,34 @@ mp.events.add({
             rewardBar.text = `$${reward}`;
         }
     },
-    "cJobSelection": () => {
+    "cJobSelection": (jobs) => {
         mp.gui.chat.show(false);
 
+        jobs = JSON.parse(jobs);
+        var job = null;
 
         ui = new NativeUI.Menu("Select a job", "Select a job as Civil!", new NativeUI.Point(50,200));
-        item = new NativeUI.UIMenuItem(
-            "Hacker",
-            "Hack stuff, little or big!"
-        );
-        item.SetLeftBadge(4);
-        ui.AddItem(item);
 
-        ui.ItemSelect.on(item => {
-            switch(item.Text) {
-                case "Hacker":
-                    jobID = 0;
-                    break;
+        for(var key in jobs) {
+            item = new NativeUI.UIMenuItem(
+                "Choose " + jobs[key].name,
+                jobs[key].description
+            );
+            if(jobs[key].badge) item.SetLeftBadge(jobs[key].badge);
+            ui.AddItem(item);
+        }
+        ui.AddItem( new NativeUI.UIMenuItem("I don't want a job", "Not having job is not important !"));
+        ui.ItemSelect.on( (item, Index) => {
+            for(var key in jobs) {
+                if("Choose " + jobs[key].name != item.Text) continue;
+                mp.events.callRemote("sJobSelection", key);
+                ui.Close();
             }
-            mp.events.callRemote("sJobSelection", jobID);
-            ui.Close();
+        });
+        ui.MenuClose.on( () => {
+            if(job == null) return player.notify("You choose to not have a job, no problem !");
             ui = null;
             mp.gui.chat.show(true);
-
         });
     },
     "playSound": (SoundName, SoundSetName) => {

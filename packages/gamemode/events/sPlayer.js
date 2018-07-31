@@ -56,11 +56,6 @@ module.exports = {
     },
 
 
-    'playerDeath': (player, reason, killer) => {
-        Players.destroyBlip(player.ID);
-        player.call("ShowShardMessage", ["~r~Wasted", "You died."]);
-        player.call("playerDead");
-    },
     "playerQuit" : (player, exitType, reason) => {
         if(Players.IsPlayerLogged(player.ID)) {
             console.log(`Player ${player.name} left, ${exitType}, reason: ${reason}`);

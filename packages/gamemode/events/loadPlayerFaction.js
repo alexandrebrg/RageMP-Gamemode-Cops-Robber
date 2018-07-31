@@ -18,7 +18,7 @@ module.exports = {
                 player.armor = 100;
                 break;
         }
-        player.dimension = 0;
+        player.dimension = Config.defaultDimension;
         player.call('cFactionSelectionDone');
         mp.events.call("sCashInit", player, Players.getPlayerCash(player.ID));
 
@@ -26,7 +26,7 @@ module.exports = {
         player.position = new mp.Vector3(spawnpoint['posx'], spawnpoint['posy'], spawnpoint['posz']);
         player.heading = spawnpoint['angle'];
 
-        player.call('setWantedLevel', [Players.getPlayerWantedLevel(player.ID)])
+        player.call('setWantedLevel', [Players.getPlayerWantedLevel(player.ID)]);
 
         player.robbery = {};        
         Players.setPlayerBlips(player.id);

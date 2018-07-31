@@ -1,6 +1,7 @@
 var Factions = require('../modules/factions');
 var Players = require('../modules/players');
 var Logs = require('../modules/logs');
+var Config = require('../data/config.json');
 
 module.exports = {
     "loadPlayerFaction" : (player, ped) => {
@@ -30,7 +31,7 @@ module.exports = {
         player.robbery = {};        
         Players.setPlayerBlips(player.id);
         if(!Factions.isFactionCops(ped.faction_id)) {
-            player.call("cJobSelection");
+            player.call("cJobSelection", [JSON.stringify(Config.Jobs)]);
         }
     }
 }

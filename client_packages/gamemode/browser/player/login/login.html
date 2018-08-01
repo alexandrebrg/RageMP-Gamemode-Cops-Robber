@@ -22,6 +22,7 @@
       <input id="password" class="Input" type="password" minlength="6" value="123456" required value="Password" />
 
       <button id="loginButton" onclick="Loguser();" type="button" class="loginButton" value="Connexion">Log</button>
+      <button id="loginButton" onclick="Reguser();" type="button" class="registerButton" value="Sign up">Sign up</button>
       <div class="errors success" id="success">Logging in</div>
       <div class="errors error" id="error">Wrong credentials</div>
       <div class="errors defaultName" id="defNameError">Seems you didn't changed default name</div>
@@ -37,6 +38,11 @@
     const success = get("success");
     const pass = get("password");
     const email = get("email");
+
+    function Reguser() {
+      mp.trigger("cFromLoginToRegister");
+    }
+
     function get(id) {
       return document.getElementById(id);
     }

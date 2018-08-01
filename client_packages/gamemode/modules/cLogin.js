@@ -24,5 +24,9 @@ mp.events.add({
     'cFromRegisterToLogin': () => {
             mp.events.call("cCloseCef");
             mp.events.call("cLoginUI");
+    },
+    'cFromLoginToRegister': () => {
+            mp.events.call("cCloseCef");
+            mp.events.call("cRegisterUI");
     }
 });

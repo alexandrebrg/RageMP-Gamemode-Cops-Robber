@@ -11,7 +11,7 @@ module.exports = {
         });
         this.Handle.connect(function(e) {
             if ( !e ) { callback(); }
-            else console.log ("DATABASE ERROR" + e);
+            else console.log ("Can't connect to database: \n" + e);
          });        
     }
 };

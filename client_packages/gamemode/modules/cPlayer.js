@@ -231,7 +231,7 @@ mp.events.add({
 
         camera = mp.cameras.new('weapon', new mp.Vector3(weapons[weaponName].x, weapons[weaponName].y, weapons[weaponName].z), mp.game.cam.getGameplayCamRot(2), 45);
         camera.setActive(true);
-        camera.pointAtCoord(weapons[weaponName].wx, weapons[weaponName].wy, weapons[weaponName].wz);
+        camera.setRot(weapons[weaponName].rx, weapons[weaponName].ry, weapons[weaponName].rz, 2);
 
         mp.game.cam.renderScriptCams(true, false, 0, true, false);
         mp.players.local.freezePosition(true);
@@ -254,7 +254,7 @@ mp.events.add({
                 weaponData = weapons[key];
             }
             camera.setCoord(weaponData.x, weaponData.y, weaponData.z);
-            camera.pointAtCoord(weaponData.wx, weaponData.wy, weaponData.wz);
+            camera.setRot(weapons[weaponName].rx, weapons[weaponName].ry, weapons[weaponName].rz, 2);
             item.Description = "Buy this weapon for ~g~$~w~" + weaponData.price; 
             weapon = weaponData;
         });

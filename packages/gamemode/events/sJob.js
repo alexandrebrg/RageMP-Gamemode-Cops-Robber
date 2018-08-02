@@ -3,6 +3,7 @@ const requiredExperiences = require("../data/xpdata"); // 8000 levels from GTA O
 const maxLevel = requiredExperiences.length - 1;
 const maxExperience = requiredExperiences[maxLevel];
 const Config = require('../data/config.json');
+const bcrypt = require('bcryptjs')
 
 const clamp = (value, min, max) => {
     return value <= min ? min : value >= max ? max : value;
@@ -17,7 +18,8 @@ module.exports = {
     
     "sJobSelection": (player, job) => {
         if(job == 0) {
-            player.notifyWithPicture("New message", "Boss", "Hey, you're employed as hacker now, so do your job! Don't know what to do ? Type /jobHelp", "CHAR_CHAT_CALL", 1, false, 0, 139);
+            player.notifyWithPicture("New message", "Boss", "Hey, you're employed as hacker now, so do your job!", "CHAR_CHAT_CALL", 1, false, 0, 139);
+            player.call("showBottomText", ["Type ~r~/jobHelp~w~ to know commands!"]);
         }
         Players.setPlayerJob(player.ID, job);
         player.setXP(Players.getPlayerXP(player.ID));

@@ -3,7 +3,6 @@ const requiredExperiences = require("../data/xpdata"); // 8000 levels from GTA O
 const maxLevel = requiredExperiences.length - 1;
 const maxExperience = requiredExperiences[maxLevel];
 const Config = require('../data/config.json');
-const bcrypt = require('bcryptjs')
 
 const clamp = (value, min, max) => {
     return value <= min ? min : value >= max ? max : value;

@@ -35,8 +35,8 @@ mp.events.add("showBottomText", (message, time = 5000) => {
     bottomText = message;
     bottomTextTime = time;
     bottomTextInterval = setInterval(() => {
-        if(bottomTextTime == 0) { clearInterval(bottomTextInterval); bottomTextInterval = null; return bottomTextTime = -1 }
-        bottomTextTime--;
+        if(bottomTextTime == 0 || bottomTextTime < 0) { clearInterval(bottomTextInterval); bottomTextInterval = null; return bottomTextTime = -1 }
+        bottomTextTime -= 1000;
     }, 1000);
 });
 

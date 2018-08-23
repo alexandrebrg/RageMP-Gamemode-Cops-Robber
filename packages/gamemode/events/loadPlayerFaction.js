@@ -25,6 +25,7 @@ module.exports = {
         spawnpoint = Factions.randomSpawn(ped.faction_id);
         player.position = new mp.Vector3(spawnpoint['posx'], spawnpoint['posy'], spawnpoint['posz']);
         player.heading = spawnpoint['angle'];
+        player.model =ped.hash;
 
         player.call('setWantedLevel', [Players.getPlayerWantedLevel(player.ID)]);
 

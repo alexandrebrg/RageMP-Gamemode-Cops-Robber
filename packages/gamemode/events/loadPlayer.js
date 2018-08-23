@@ -27,9 +27,9 @@ module.exports = {
         mp.events.call("loadPlayerFactionSelection", player);
     },
     "loadPlayerFactionSelection": player => {
-        player.spawn(new mp.Vector3(402.8664, -996.4108, -100.00027));
-        player.heading = -185.0;
-        player.dimension =  Math.floor(Math.random() * 1000);
+        player.spawn(new mp.Vector3(1198, 3114, 40.4));
+        player.heading = 281.0829;
+        player.dimension = Math.floor(Math.random() * 1000);
         player.call('cFactionSelection', [Factions.getFactionData()]);
 
     }

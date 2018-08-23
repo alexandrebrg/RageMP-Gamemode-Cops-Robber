@@ -82,8 +82,9 @@ class CamerasManager {
         }
     }
 
-    static createCamera(name, type, position, rotation, fov) {
+    static createCamera(name, type, position, rotation, fov, shake = true) {
         const cam = mp.cameras.new(type, position, rotation, fov);
+        if(shake) cam.shake("HAND_SHAKE", 1)
         cameraSerialize(cam);
         CamerasManagerInfo.cameras.set(name, cam);
         return cam;

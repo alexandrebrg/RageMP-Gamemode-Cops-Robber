@@ -85,7 +85,8 @@ module.exports.Init = function() {
         restricted int NOT NULL DEFAULT 0,
         leader varchar(128) NOT NULL DEFAULT 'NoOne',
         desc varchar(128) NOT NULL DEFAULT 'A new gang is in town baby',
-        cop int(11) NOT NULL DEFAULT 0
+        cop int(11) NOT NULL DEFAULT 0,
+        default_car varchar(54) NOT NULL DEFAULT 'exemplar'
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;`, function() { } );
     DB.Handle.query("ALTER TABLE `server_factions` ADD PRIMARY KEY (`id`);", function() { } );
     DB.Handle.query("ALTER TABLE `server_factions` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;", function() { } );

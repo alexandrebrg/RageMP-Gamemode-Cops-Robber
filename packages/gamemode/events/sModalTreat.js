@@ -38,7 +38,7 @@ module.exports = {
             else if(id == "createTempVeh") {
                 if(!Vehicles.isVehNameValid(args[0])) return player.outputChatBox(adminMessage.prefix + "Veh name is invalid!");
                 pos = player.position
-                Vehicles.createTempVehicle(args[0], pos.x + 2, pos.y, pos.z + 1, player.heading, args[1], 0);
+                Vehicles.createTempVehicle(args[0], pos.x + 2, pos.y, pos.z + 1, player.heading, args[1], 0, player.dimension);
                 return player.notify("Vehicle created");
             } 
             else if(id == "editVeh") {

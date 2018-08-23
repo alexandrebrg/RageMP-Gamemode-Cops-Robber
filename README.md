@@ -32,3 +32,5 @@
   - Update faction / ped selection system
   - Fix bottom text bug
   - Add a visual car for each faction
+  - Temporary vehicle now spawn to the player creator's dimension
+  - Factions have a default cars, defined as logo for faction selection

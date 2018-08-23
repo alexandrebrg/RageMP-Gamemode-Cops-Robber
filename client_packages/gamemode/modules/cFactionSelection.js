@@ -205,6 +205,7 @@ mp.events.add({
         loadFactionStuff();
         mp.events.call('changeChatState', false);
         mp.gui.chat.show(false);
+        mp.game.ui.displayRadar(false);
     },
     "cSkinChange" : (hash) => {
         mp.events.callRemote("sSkinChange", hash);
@@ -230,6 +231,7 @@ mp.events.add({
         mp.gui.chat.show(true);
         creatorCamera.setActiveCamera(false);
         camManager.destroyCamera(creatorCamera)
+        mp.game.ui.displayRadar(true);
     }
 });
 camManager.on('startInterp', (camera) => { 

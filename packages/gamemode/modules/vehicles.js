@@ -187,11 +187,11 @@ function loadNewVeh() {
     })
 }
 
-module.exports.createTempVehicle = function(name, posx, posy, posz, angle, color1) {
+module.exports.createTempVehicle = function(name, posx, posy, posz, angle, color1, dimensione) {
     id = Vehicles.length;
     Vehicles[id] = mp.vehicles.new(mp.joaat(name), new mp.Vector3(posx, posy, posz), {
         heading: angle,
-        dimension: Config.defaultDimension
+        dimension: dimensione
     });
     Vehicles[id].temp = true;
     Vehicles[id].setColor(color1);

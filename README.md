@@ -24,3 +24,11 @@
   - Respawn cars
   - Edit a player
   - Teleport to pos
+
+
+#V0.11 Update
+  - Update Login UI
+  - Delete Register UI (Need to go to a panel for it)
+  - Update faction / ped selection system
+  - Fix bottom text bug
+  - Add a visual car for each faction

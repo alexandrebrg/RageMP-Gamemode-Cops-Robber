@@ -2,13 +2,14 @@ const DB = require('../modules/db');
 const Players = require('../modules/players');
 const Admins = require('../modules/admins');
 const Factions = require('../modules/factions');
+const PM = require('../messages/player.json');
 
 
 module.exports = {
     'loadPlayer' : player => {        
 
         DB.Handle.query(`SELECT * from server_admins WHERE id = ? LIMIT 1`, player.info.sqlid, function(e, resulte){ 
-            player.outputChatBox("!{FF0000} You are connected as staff on this server!");
+            player.outputChatBox(PM.ConnectedAsStaff);
             player.adminID = Admins.CreateAdminClass(player.info.sqlid, player.name, resulte[0]["see"], resulte[0]["blame"], resulte[0]["edit"]);
         });   
         
@@ -33,4 +34,4 @@ module.exports = {
         player.call('cFactionSelection', [Factions.getFactionData()]);
 
     }
-}
+};

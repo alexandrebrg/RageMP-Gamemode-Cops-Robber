@@ -1,7 +1,7 @@
 const DB = require('./db');
 const Factions = require('./factions');
 const Config = require('../data/config.json');
-const Labels = require('../modules/labels')
+const Labels = require('../modules/labels');
 
 let PlayersOnline = [];
 
@@ -23,58 +23,63 @@ const Player = function(sqlID, name, email, spenttime, access, cash, bank, wante
     this.job = null;
     this.cuffed = false;
     this.ID = FindEmptySlot();
-    this.jail = null;
+    this.jail = 0;
     this.faction = 0;
-}
+};
 
+/**
+ * Find empty slot on array
+ * @return {number}
+ */
 function FindEmptySlot () {
-    for ( var i = 0; i < global.MAX_PLAYERS; i++ ) {
+    for ( let i = 0; i < global.MAX_PLAYERS; i++ ) {
         if ( !IsPlayerLogged(i) ) return i;   
     }
 }
 /**
- * 
+ * Check if player is jailed
  * @param {int} id Player ID
+ * @return {boolean}
  */
 module.exports.isPlayerJailed = function(id) {
-    return (PlayersOnline[id].jail > 0) ? true : false;
-}
+    return (PlayersOnline[id].jail > 0);
+};
 /**
- * 
+ * Set jail time to player
  * @param {int} id Player ID
  * @param {int} time Time in jail left
  */
 module.exports.setJailTime = function(id, time) {
     return PlayersOnline[id].jail = time;
-}
+};
 /**
  * For timers
  * @param {int} id Player ID 
  */
 module.exports.decreaseJailTime = function(id) {
     return PlayersOnline[id].jail -= 1;
-}
+};
 /**
  * Return player name
  * @param {int} id Player id
  */
 module.exports.getPlayerName = function(id) {
     return PlayersOnline[id].name;
-}
+};
 /**
  * Return if blip exist
  * @param {int} id player ID
  */
 module.exports.playerBlipExist = function(id) {
-    return typeof PlayersOnline[id].blip != "undefined";
-}
+    return typeof PlayersOnline[id].blip !== "undefined";
+};
 /**
  * Is player cuffed
  * @param {int} id player id
  */
 module.exports.isPlayerCuffed = function(id) {
     return PlayersOnline[id].cuffed;
-}
+};
 /**
  * Change player cuff
  * @param {int} id Player id
@@ -82,32 +87,32 @@ module.exports.isPlayerCuffed = function(id) {
  */
 module.exports.setPlayerCuff = function(id, toggle) {    
     return PlayersOnline[id].cuffed = toggle;
-}
+};
 /**
  * Create blip for player
  * @param {int} id player id
  */
 module.exports.setPlayerBlips = function (id) {
     blip = PlayersOnline[id];
-    icon = (blip.faction == 2) ? 60 : 1;
+    icon = (blip.faction === 2) ? 60 : 1;
     blip.blip = mp.blips.new(icon, new mp.Vector3(0,0,0));
-	blip.blip.name = blip.name;
+	  blip.blip.name = blip.name;
     blip.blip.dimension = Config.defaultDimension;
 
     blip.blip.color = getBlipColor(id);
-}
+};
 
 function getBlipColor(id) {
     blip = PlayersOnline[id];
     let color = 0;
-    if(blip.faction == 1) {
-        if(blip.wantedlevel == 0) color = 4;
-        if(blip.wantedlevel == 1) color = 46;
+    if(blip.faction === 1) {
+        if(blip.wantedlevel === 0) color = 4;
+        if(blip.wantedlevel === 1) color = 46;
         if(blip.wantedlevel > 1 && blip.wantedlevel < 4) color = 81;
         if(blip.wantedlevel >= 4) color = 1;
     } else if(Factions.isFactionCops(blip.faction) && blip.faction !== 4) {
         color = 63;
-    } else if(Factions.isFactionCops(blip.faction) && blip.faction == 4) {
+    } else if(Factions.isFactionCops(blip.faction) && blip.faction === 4) {
         color = 83;
     }
     return color;
@@ -120,7 +125,7 @@ function getBlipColor(id) {
 module.exports.destroyBlip = function(id) {
     PlayersOnline[id].blip.destroy();
     PlayersOnline[id].blip = false;
-}
+};
 /**
  * Update blip !
  * @param {int} id player id
@@ -130,7 +135,7 @@ module.exports.updateBlipPosition = function(id, position) {
     blip = PlayersOnline[id];
     blip.blip.color = getBlipColor(id);
     blip.blip.position = position;
-} 
+};
 /**
  * Update player wanted level
  * @param {int} id Player id
@@ -144,53 +149,54 @@ module.exports.updatePlayerWantedLevel = function(id, level, positiv = true) {
         PlayersOnline[id].wantedlevel -= (PlayersOnline[id].wantedlevel - level < 0) ? PlayersOnline[id].wantedlevel : level;        
     }
     return PlayersOnline[id].wantedlevel;
-}
+};
 /**
  * Return player wanted level
  * @param {int} id player id
  */
 module.exports.getPlayerWantedLevel = function(id ) {
     return PlayersOnline[id].wantedlevel;
-}
+};
 /**
  * Return if player have access
  * @param {int} id player id
  * @param {int} faction_id Faction id
+ * @return {boolean}
  */
 module.exports.PlayerHaveAccess = function(id, faction_id) {
-    for(var i=0;i<PlayersOnline[id].access.length;i++) {
-        if(PlayersOnline[id].access[i].faction_id == faction_id) return true;
+    for(let i=0;i<PlayersOnline[id].access.length;i++) {
+        if(PlayersOnline[id].access[i].faction_id === faction_id) return true;
     } 
     return false;
-}
+};
 /**
  * Return player cash
  * @param {int} id player id
  */
 module.exports.getPlayerCash = function(id) {
     return PlayersOnline[id].cash;
-}
+};
 /**
  * Return player faction ID
  * @param {int} id player id
  */
 module.exports.getPlayerFaction = function(id) {
     return PlayersOnline[id].faction;
-}
+};
 /**
  * Return player bank account 
  * @param {int} id player id
  */
 module.exports.getPlayerBank = function(id) {
     return PlayersOnline[id].bank;
-}
+};
 /**
  * Return player job ID
  * @param {int} id player id
  */
 module.exports.getPlayerJob = function(id) {
     return PlayersOnline[id].job;
-}
+};
 /**
  * Deposit money in bank (Check if cash is good also for doing this)
  * @param {int} id Player id
@@ -201,7 +207,7 @@ module.exports.depositBank = function(id, money) {
     updatePlayerBank(id, money);
     updatePlayerCash(id, -money);
     return true;
-}
+};
 /**
  * Get money from bank (Check if can do it also)
  * @param {int} id player id
@@ -212,7 +218,7 @@ module.exports.withdrawBank = function(id, money) {
     updatePlayerBank(id, -money);
     updatePlayerCash(id, money);
     return true;
-}
+};
 /**
  * Add money to player bank (Not SET)
  * @param {int} id player id
@@ -242,7 +248,7 @@ module.exports.updatePlayerCash = updatePlayerCash;
  */
 module.exports.setPlayerFaction = function(id, faction_id) {
     return PlayersOnline[id].faction = faction_id;
-}
+};
 /**
  * Set player job by id
  * @param {int} id player id
@@ -250,7 +256,7 @@ module.exports.setPlayerFaction = function(id, faction_id) {
  */
 module.exports.setPlayerJob = function(id, job) {
     return PlayersOnline[id].job = job;
-}
+};
 /**
  * Get SQL field by job id
  * @param {int} id Player id
@@ -266,7 +272,7 @@ module.exports.getPlayerJobField = getPlayerJobField;
  */
 module.exports.getPlayerXP = function(id) {
     return PlayersOnline[id][getPlayerJobField(id)];
-}
+};
 /**
  * Add xp to player NOT SET
  * @param {int} id player id
@@ -275,7 +281,7 @@ module.exports.getPlayerXP = function(id) {
 module.exports.changeXP = function(id, xp) {
     return PlayersOnline[id][getPlayerJobField(id)] += xp;
 
-}
+};
 /**
  * SET XP to player data job
  * @param {int} id player id
@@ -283,7 +289,7 @@ module.exports.changeXP = function(id, xp) {
  */
 module.exports.setXP = function(id, xp) {
     return PlayersOnline[id][getPlayerJobField(id)] = xp;
-}
+};
 /**
  * Update player spent time to all players
  */
@@ -295,18 +301,18 @@ module.exports.updateSpentTime = function() {
         }
     }
     return PlayersOnline.length;
-}
+};
 /**
  * Send chat message to cops
  * @param {string} message Message
  */
 module.exports.sendMessageToCops = function(message) {
     PlayersOnline.forEach(e => {
-        if(e.faction == 2) {
+        if(e.faction === 2) {
             mp.players[player.ID].outputChatBox(message); 
         }
     });
-}
+};
 /**
  * Notify Cops & create position of action
  * @param {string} message Notify string
@@ -314,13 +320,13 @@ module.exports.sendMessageToCops = function(message) {
  */
 module.exports.notifyCops = function(message, position) {
     mp.players.forEach( (player, id) => {
-        if(player.faction == 2) {
+        if(player.faction === 2) {
             mp.players[player.ID].call("CopActionPosition", [position]);
             mp.players[player.ID].notifyWithPicture("Emergency!", "Police Center", message + "~n~~b~Press M to go there !", "CHAR_CALL911", 0, false, 6, -1) 
             mp.players[player.ID].call("playSound", ["CHALLENGE_UNLOCKED", "HUD_AWARDS"]);
         }
     });
-}
+};
 /**
  * Create notification for all players
  * @param {string} message Notification message
@@ -332,7 +338,7 @@ module.exports.notifyAllPlayers = function(message, char = "CHAR_CALL911", title
     mp.players.forEach( (player, id) => {
         mp.players[player.ID].notifyWithPicture(title, desc, message, char, 0, false, 0, 18) 
     });
-}
+};
 /**
  * Create player class
  * @param {int} sqlid Player SQL ID
@@ -348,7 +354,7 @@ module.exports.CreatePlayerClass = function(sqlid, name, email) {
         mp.players[playa.ID].ID = playa.ID;
         SetPlayerAccess(playa.ID);
     });
-}
+};
 /**
  * From sql id get player access
  * @param {int} id SQL ID
@@ -359,22 +365,22 @@ module.exports.SetPlayerAccess = function(id) {
             PlayersOnline[id].access = result;
         } else { PlayersOnline[id].access = []; }
     });
-}
+};
 
 module.exports.UpdatePlayerClass = function() {
 
-}
+};
 /**
  * Save player datas
  * @param {int} id Player ID
  */
 function SavePlayerClass(id) {
     query = `UPDATE server_players SET `;
-    for(var key in PlayersOnline[id]) {
+    for(let key in PlayersOnline[id]) {
         i = PlayersOnline[id];
-        if(Array.isArray(key) || ["sqlID", "faction", "access", "ID", "blip", "job", "cuffed"].indexOf(key) != -1) continue;
+        if(Array.isArray(key) || ["sqlID", "faction", "access", "ID", "blip", "job", "cuffed"].indexOf(key) !== -1) continue;
         query += `${key} = `;
-        query += (typeof i[key] == "number") ? i[key] : `"${i[key]}"`;
+        query += (typeof i[key] === "number") ? i[key] : `"${i[key]}"`;
         query += ","
     }
     query = query.substring(0, query.length - 1);
@@ -393,28 +399,30 @@ module.exports.SaveAllPlayersClass = function() {
     for(var i = 0; i < PlayersOnline.length; i++) {
         SavePlayerClass(i);
     }
-}
+};
 /**
  * Delete player class when disconnected
  * @param {int} id player id
  */
 module.exports.DeletePlayerClass = function(id) {
     delete PlayersOnline[id];
-}
+};
 /**
  * Return class iD from sqlid
  * @param {int} sqlid Player sql id
+ * @return {number}
  */
 module.exports.GetPlayerIDBySQLID = function(sqlid) {
-    for ( var i = 0; i < global.MAX_PLAYERS; i++ ) {
+    for ( let i = 0; i < global.MAX_PLAYERS; i++ ) {
         if (  IsPlayerLogged(i) ) {
-            if ( PlayersOnline [ i ].sqlID == sqlid ) return i;
+            if ( PlayersOnline [ i ].sqlID === sqlid ) return i;
         }
     }    
-}
+};
 /**
  * Is player logged & registered
  * @param {int} id player id
+ * @return {boolean}
  */
 function IsPlayerLogged(id) {
     return ( typeof PlayersOnline[id] !== 'undefined' );
@@ -446,7 +454,7 @@ module.exports.Init = function() {
 
     // MARKER ARREST LSPD 
 
-    for(var key in Config.Arrests){
+    for(let key in Config.Arrests){
         ap = Config.Arrests[key];
         marker = mp.markers.new(1, new mp.Vector3(ap.Position.x , ap.Position.y,ap.Position.z-1), 3, {
             color: [15,0,255, 125],
@@ -462,7 +470,7 @@ module.exports.Init = function() {
     }
 
     // VEHICLE LS CUSTOM MARKER
-    for(var key in Config.Customs){
+    for(let key in Config.Customs){
         custom = Config.Customs[key];
         marker = mp.markers.new(1, new mp.Vector3(custom.Position.x, custom.Position.y, custom.Position.z -1), 3, {
             color: [15,0,255, 125],
@@ -476,10 +484,10 @@ module.exports.Init = function() {
             name: "Vehicle Custom"
         });
         Labels.createLabelOffline("Press ~b~Y~w~ to enter in the ~p~Custom", new mp.Vector3(custom.Position.x, custom.Position.y, custom.Position.z ), Config.defaultDimension);
-    };
+    }
 
-    for(var key in Config.CarShop) {
-        if(typeof Config.CarShop[key].Position == "undefined") continue;
+    for(let key in Config.CarShop) {
+        if(typeof Config.CarShop[key].Position === "undefined") continue;
         carshop = Config.CarShop[key];
         marker = mp.markers.new(1, new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z -1), 3, {
             color: [15,0,255, 125],
@@ -495,5 +503,4 @@ module.exports.Init = function() {
         Labels.createLabelOffline("Press ~b~Y~w~ to enter in the ~p~Shop", new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), Config.defaultDimension);
     
     }
-  
-}
+};

@@ -20,5 +20,20 @@
     "NotWanted": "~r~(!) ~w~This player is not wanted!",
     "MustBeInVehicle": "~r~(!) ~w~You must be in a vehicle to do this!",
     "VehicleBuyNotEnoughMoney": "~r~(!) ~w~You don't have enough money for this vehicle",
-    "MustNotBeWanted": "~r~(!) ~w~You must be not wanted to kill yourself!"
+    "MustNotBeWanted": "~r~(!) ~w~You must be not wanted to kill yourself!",
+    "RobberyInterrupted": "~r~(!) ~w~Robbery interrupted",
+    "RobberyInProgress": "A robbery is in progress, need anybody here!",
+    "PlayerIsCopRob": "~r~You can't rob, you are a cop!",
+    "StoreAlreadyRobbed": "~r~(!) ~w~Store already robbed, wait some time!",
+    "PlayerDead":{
+      "title": "~r~Wasted",
+      "text": "You died."
+    },
+    "ConnectedAsStaff": "!{FF0000} You are connected as staff on this server!",
+    "EnterVehicle":{
+      "title": "~y~Argh!",
+      "first_text": "You must be from",
+      "second_text": "to drive this!",
+      "admin": "~r~You enter as Admin"
+    }
 }

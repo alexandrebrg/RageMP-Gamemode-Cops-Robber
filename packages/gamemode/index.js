@@ -1,8 +1,9 @@
 "use strict";
 
-var DB = require('./modules/db');
-var fs = require('fs');
-var path = require('path');
+const DB = require('./modules/db');
+const fs = require('fs');
+const path = require('path');
+const dotenv = require('dotenv').config();
 
 var Events = [];
 

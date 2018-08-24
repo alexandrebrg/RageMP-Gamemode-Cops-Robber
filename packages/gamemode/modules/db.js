@@ -4,10 +4,10 @@ module.exports = {
 	Handle: null,
     Connect: function(callback) {
         this.Handle = mysql.createConnection({
-            host     : 'localhost', //do not use ip address as a host, create a dns if your mysql server is not hosted on same server/machine as ragemp server
-            user     : 'root',
-            password : '',
-            database : 'gta5'
+            host     : process.env.DB_HOST, //do not use ip address as a host, create a dns if your mysql server is not hosted on same server/machine as ragemp server
+            user     : process.env.DB_USER,
+            password : process.env.DB_PASSWORD,
+            database : process.env.DB_DATABASE
         });
         this.Handle.connect(function(e) {
             if ( !e ) { callback(); }

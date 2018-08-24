@@ -31,6 +31,6 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "dotenv": "^6.0.0",
-    "mysql": "^2.16.0",
+    "mysql": "^2.16.0"
   }
 }

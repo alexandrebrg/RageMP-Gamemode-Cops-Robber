@@ -29,6 +29,8 @@ module.exports = {
                     if(b.faction != 1 && Players.PlayerHaveAccess(player.ID, b.faction) && !player.adminID) return player.notify(PM.AccessTP)
                     player.call("fadeOut");
                     setTimeout(function() {
+                        let veh;
+                        let seat;
                         if(b.veh && player.vehicle) {
                             veh = player.vehicle;
                             seat = player.seat;
@@ -41,7 +43,6 @@ module.exports = {
                             player.vehicle.heading = b.to_angle;
                         }
                         player.heading = b.to_angle;
-                        veh = null;
                         player.call("fadeIn");
                     }, 1000)
 

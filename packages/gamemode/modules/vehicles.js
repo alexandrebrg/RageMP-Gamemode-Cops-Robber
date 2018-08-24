@@ -1,8 +1,8 @@
-var DB = require('./db');
-var Veh_Hashes = require('../data/vehicle_hashes');
-var Config = require('../data/config.json');
+const DB = require('./db');
+const Veh_Hashes = require('../data/vehicle_hashes');
+const Config = require('../data/config.json');
 
-var Vehicles = [];
+let Vehicles = [];
 /**
  * load all vehicle (Only local)
  */

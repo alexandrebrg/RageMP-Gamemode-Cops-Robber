@@ -1,6 +1,6 @@
-var DB = require('./db');
+const DB = require('./db');
 
-var Factions = [];
+let Factions = [];
 
 
 function loadFactions() {

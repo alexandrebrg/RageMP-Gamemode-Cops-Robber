@@ -1,8 +1,8 @@
-var DB = require('./db');
+const DB = require('./db');
 
-var AdminsOnline = [];
+let AdminsOnline = [];
 
-var Admin = function(sqlID, name, see, blame, edit) {
+const Admin = function(sqlID, name, see, blame, edit) {
     this.sqlID = sqlID;
     this.name = name;
     this.see = see;

@@ -1,11 +1,11 @@
-var DB = require('./db');
-var Factions = require('./factions');
-var Config = require('../data/config.json');
-var Labels = require('../modules/labels')
+const DB = require('./db');
+const Factions = require('./factions');
+const Config = require('../data/config.json');
+const Labels = require('../modules/labels')
 
-var PlayersOnline = [];
+let PlayersOnline = [];
 
-var Player = function(sqlID, name, email, spenttime, access, cash, bank, wantedlevel, hacker, reseller) {
+const Player = function(sqlID, name, email, spenttime, access, cash, bank, wantedlevel, hacker, reseller) {
 
     this.sqlID = sqlID;
     this.name = name;

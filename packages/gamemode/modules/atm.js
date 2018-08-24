@@ -1,10 +1,10 @@
-var Labels = require('./labels')
-var ATM_pos = require('../data/atm_pos');
-var Config = require('../data/config.json')
+const Labels = require('./labels')
+const ATM_pos = require('../data/atm_pos');
+const Config = require('../data/config.json')
 
-var ATMs = [];
+let ATMs = [];
 
-var ATM = function(pos) {
+const ATM = function(pos) {
     this.labelID = Labels.createLabelOffline("ATM", pos, 0, 15);
     this.marker = mp.markers.new(1, {x: pos.x, y: pos.y, z: pos.z -1}, 1, {
         dimension: Config.defaultDimension,

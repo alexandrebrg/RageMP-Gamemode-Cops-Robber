@@ -1,7 +1,7 @@
-var DB = require('./db');
-var Labels = require('./labels')
+const DB = require('./db');
+const Labels = require('./labels')
 
-var Teleporters = [];
+let Teleporters = [];
 
 function loadTP() {
     DB.Handle.query(`SELECT * FROM server_teleporters`, function(e, result){

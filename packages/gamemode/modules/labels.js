@@ -1,8 +1,7 @@
-var DB = require('./db');
-var ATM_pos = require('../data/atm_pos');
-var Config = require('../data/config.json')
+const DB = require('./db');
+const Config = require('../data/config.json')
 
-var Labels = [];
+let Labels = [];
 Labels[0] = {};
 function loadLabels() {
     DB.Handle.query(`SELECT * FROM server_labels`, function(e, result) {

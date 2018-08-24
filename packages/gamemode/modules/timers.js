@@ -1,5 +1,5 @@
-var Players = require('./players'); 
-var Bizs = require('./business');
+const Players = require('./players'); 
+const Bizs = require('./business');
 
 let minuteInterval = null;
 let fiveMinutesInterval = null;

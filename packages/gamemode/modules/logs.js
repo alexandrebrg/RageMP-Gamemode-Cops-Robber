@@ -1,4 +1,4 @@
-var DB = require('./db');
+const DB = require('./db');
 
 module.exports = {
     Init: function() {

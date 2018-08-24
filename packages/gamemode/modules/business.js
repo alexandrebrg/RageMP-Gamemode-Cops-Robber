@@ -1,7 +1,7 @@
-var DB = require('./db');
-var config = require('../data/config');
+const DB = require('./db');
+const config = require('../data/config');
 
-var Bizs = [];
+let Bizs = [];
 
 function loadBiz() {
     DB.Handle.query(`SELECT * from server_biz`, function(e, result) {
@@ -14,7 +14,7 @@ function loadBiz() {
     });
 }
 
-var Biz = function(id, type, name, posx, posy, posz, dimension) {
+const Biz = function(id, type, name, posx, posy, posz, dimension) {
     switch(type) {
         case 1:
             this.name = "~b~24/7";

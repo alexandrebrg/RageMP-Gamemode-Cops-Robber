@@ -1,10 +1,10 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
 module.exports = {
 	Handle: null,
     Connect: function(callback) {
         this.Handle = mysql.createConnection({
-            host     : process.env.DB_HOST, //do not use ip address as a host, create a dns if your mysql server is not hosted on same server/machine as ragemp server
+            host     : process.env.DB_HOST, 
             user     : process.env.DB_USER,
             password : process.env.DB_PASSWORD,
             database : process.env.DB_DATABASE

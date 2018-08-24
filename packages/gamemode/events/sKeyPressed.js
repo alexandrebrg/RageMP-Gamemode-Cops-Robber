@@ -4,9 +4,6 @@ const Factions = require('../modules/factions');
 const Ammunation = require('../data/ammunation.json');
 
 module.exports = {
-  "sKeyPressed" : (player, key) => {
-    if(key === "Y") {
-
       let done = false;
       mp.markers.forEachInRange(player.position, 3, (b) => {
         if(b.store && !b.robbed) {

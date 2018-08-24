@@ -1,0 +1,34 @@
+{
+  "name": "ragemp-gamemode-cops-robber",
+  "version": "1.0.11",
+  "description": "Cops and Robbers RageMP Gamemode",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Protocole63/RageMP-Gamemode-Cops-Robber.git"
+  },
+  "keywords": [
+    "ragemp",
+    "cops",
+    "robbers",
+    "gamemode"
+  ],
+  "author": "Protocole63",
+  "contributors": [
+    {
+      "name": "Contributor",
+      "url": "http://github.com/@contributor"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Protocole63/RageMP-Gamemode-Cops-Robber/issues"
+  },
+  "homepage": "https://github.com/Protocole63/RageMP-Gamemode-Cops-Robber#readme",
+  "dependencies": {
+    "mysql": "^2.16.0"
+  }
+}

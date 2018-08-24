@@ -1,2 +1,12 @@
 node_modules/
 package-lock\.json
+project/
+plugins/
+bt.dat
+Cams.json
+conf.json
+node.dll
+server.exe
+sql.sql
+.idea/
+bridge/

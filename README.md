@@ -25,6 +25,9 @@
   - Edit a player
   - Teleport to pos
 
+## Installation
+1. Install npm dependencies: `npm install`
+2. Change `.env.example` to `.env`
 
 #V0.11 Update
   - Update Login UI

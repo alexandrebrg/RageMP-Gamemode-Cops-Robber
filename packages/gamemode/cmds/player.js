@@ -1,5 +1,5 @@
-var Players = require('../modules/players');
-var PM = require('../messages/player.json')
+const Players = require('../modules/players');
+const PM = require('../messages/player.json')
 
 module.exports = {
     "suicide": (player) => {

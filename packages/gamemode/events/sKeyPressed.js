@@ -1,13 +1,13 @@
-var Players = require('../modules/players');
-var PM = require('../messages/player.json')
-var Factions = require('../modules/factions')
-var Ammunation = require('../data/ammunation.json')
+const Players = require('../modules/players');
+const PM = require('../messages/player.json')
+const Factions = require('../modules/factions')
+const Ammunation = require('../data/ammunation.json')
 
 module.exports = {
     "sKeyPressed" : (player, key) => {
         if(key=="Y") {
 
-            var done = false;
+            let done = false;
             mp.markers.forEachInRange(player.position, 3, (b) => {
                 if(b.store && !b.robbed) {
                     switch(b.storeType) {

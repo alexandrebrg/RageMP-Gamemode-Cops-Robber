@@ -1,10 +1,10 @@
-var PM = require('../messages/player');
-var Veh_Hash = require('../data/vehicle_hashes');
-var Custom_prices = require('../data/custom_prices');
-var Players = require('../modules/players')
-var Config = require('../data/config.json')
-var Car_Shop = require('../data/vehicle_shop.json');
-var Vehicle = require('../modules/vehicles')
+const PM = require('../messages/player');
+const Veh_Hash = require('../data/vehicle_hashes');
+const Custom_prices = require('../data/custom_prices');
+const Players = require('../modules/players')
+const Config = require('../data/config.json')
+const Car_Shop = require('../data/vehicle_shop.json');
+const Vehicle = require('../modules/vehicles')
 
 module.exports = {
     "showVehicleCustom": (player, customID) => {

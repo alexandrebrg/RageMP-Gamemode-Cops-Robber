@@ -1,6 +1,6 @@
-var fs = require('fs');
+const fs = require('fs');
 
-var cmds = [];
+const cmds = [];
 
 fs.readdirSync(path.resolve(global.Path, 'cmds')).forEach( function(i) {
     Object.assign(cmds, require('../cmds/' + i)); 

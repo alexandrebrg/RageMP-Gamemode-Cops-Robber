@@ -1,5 +1,5 @@
-var Players = require('../modules/players');
-var playerMessage = require('../messages/player');
+const Players = require('../modules/players');
+const playerMessage = require('../messages/player');
 
 
 module.exports = {

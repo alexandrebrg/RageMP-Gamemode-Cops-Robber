@@ -1,4 +1,4 @@
-var Players = require('../modules/players');
+const Players = require('../modules/players');
 
 mp.events.add({
     "playerChat": (player, message) => {

@@ -1,10 +1,10 @@
-var Factions = require("../modules/factions");
-var adminMessage = require("../messages/admin.json");
-var Vehicles = require('../modules/vehicles');
-var Logs = require('../modules/logs');
-var Labels = require('../modules/labels');
-var Biz = require('../modules/business');
-var Players = require('../modules/players')
+const Factions = require("../modules/factions");
+const adminMessage = require("../messages/admin.json");
+const Vehicles = require('../modules/vehicles');
+const Logs = require('../modules/logs');
+const Labels = require('../modules/labels');
+const Biz = require('../modules/business');
+const Players = require('../modules/players')
 
 
 module.exports = {

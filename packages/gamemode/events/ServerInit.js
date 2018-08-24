@@ -1,13 +1,13 @@
-var Players = require('../modules/players');
-var Logs = require('../modules/logs');
-var Admins = require('../modules/admins');
-var Factions = require('../modules/factions');
-var Vehicles = require('../modules/vehicles');
-var Labels = require('../modules/labels');
-var Biz = require('../modules/business');
-var Timers = require('../modules/timers');
-var Teleporters = require('../modules/teleporters');
-var ATMs = require('../modules/atm')
+const Players = require('../modules/players');
+const Logs = require('../modules/logs');
+const Admins = require('../modules/admins');
+const Factions = require('../modules/factions');
+const Vehicles = require('../modules/vehicles');
+const Labels = require('../modules/labels');
+const Biz = require('../modules/business');
+const Timers = require('../modules/timers');
+const Teleporters = require('../modules/teleporters');
+const ATMs = require('../modules/atm')
 
 module.exports.ServerInit = function() {
     Players.Init();

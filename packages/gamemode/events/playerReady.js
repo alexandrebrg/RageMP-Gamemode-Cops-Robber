@@ -1,5 +1,4 @@
-var Logs = require('../modules/logs');
-var DB = require('../modules/db');
+const Logs = require('../modules/logs');
 
 
 function showLoginCef(player) {

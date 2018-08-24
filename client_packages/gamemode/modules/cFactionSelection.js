@@ -232,6 +232,10 @@ mp.events.add({
         creatorCamera.setActiveCamera(false);
         camManager.destroyCamera(creatorCamera)
         mp.game.ui.displayRadar(true);
+        for(var i=1;i<cFactionData.length;i++) {
+            cFactionData[i].ped.destroy();
+            cFactionData[i].veh.destroy();
+        }
     }
 });
 camManager.on('startInterp', (camera) => { 

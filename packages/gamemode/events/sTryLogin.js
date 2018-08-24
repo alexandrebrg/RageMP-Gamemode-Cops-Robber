@@ -1,5 +1,5 @@
-var Logs = require('../modules/logs');
-var DB = require('../modules/db')
+const Logs = require('../modules/logs');
+const DB = require('../modules/db')
 
 function hashPassword(str) {
     const cipher = crypto.createCipher('aes192', 'a pass');

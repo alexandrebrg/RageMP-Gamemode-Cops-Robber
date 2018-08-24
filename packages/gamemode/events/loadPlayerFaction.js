@@ -1,7 +1,7 @@
-var Factions = require('../modules/factions');
-var Players = require('../modules/players');
-var Logs = require('../modules/logs');
-var Config = require('../data/config.json');
+const Factions = require('../modules/factions');
+const Players = require('../modules/players');
+const Logs = require('../modules/logs');
+const Config = require('../data/config.json');
 
 module.exports = {
     "loadPlayerFaction" : (player, ped) => {

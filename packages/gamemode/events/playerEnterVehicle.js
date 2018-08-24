@@ -1,6 +1,6 @@
-var Factions = require('../modules/factions');
-var playerMessage = require('../messages/player');
-var Players = require ('../modules/players')
+const Factions = require('../modules/factions');
+const playerMessage = require('../messages/player');
+const Players = require ('../modules/players')
 
 module.exports = {
     "playerEnterVehicle" : (player, vehicle, seat) => {

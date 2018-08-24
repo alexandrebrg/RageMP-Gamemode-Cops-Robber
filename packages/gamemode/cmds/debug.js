@@ -1,8 +1,10 @@
-var ATMs = require('../modules/atm')
-var adminMessage = require('../messages/admin.json');
+const adminMessage = require('../messages/admin.json');
 module.exports = {
     "test": (player, args) => {
-        player.health = 0;
+        player.health = -1;
+    },
+    "getdim": (player) => {
+        player.outputChatBox("Your dimension: " + player.dimension)
     },
     "dim": (player, args) => {
         player.dimension = parseInt(args[0]);

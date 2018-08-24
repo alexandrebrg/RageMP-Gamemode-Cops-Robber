@@ -1,7 +1,7 @@
-var DB = require('../modules/db');
-var Players = require('../modules/players');
-var Admins = require('../modules/admins');
-var Factions = require('../modules/factions');
+const DB = require('../modules/db');
+const Players = require('../modules/players');
+const Admins = require('../modules/admins');
+const Factions = require('../modules/factions');
 
 
 module.exports = {

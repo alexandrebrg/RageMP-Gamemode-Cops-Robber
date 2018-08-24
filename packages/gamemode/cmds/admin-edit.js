@@ -1,8 +1,8 @@
-var adminMessage = require('../messages/admin.json');
-var Factions = require('../modules/factions');
-var Logs = require('../modules/logs');
-var Players = require('../modules/players');
-var ATMs = require('../modules/atm')
+const adminMessage = require('../messages/admin.json');
+const Factions = require('../modules/factions');
+const Logs = require('../modules/logs');
+const Players = require('../modules/players');
+const ATMs = require('../modules/atm')
 module.exports = {
 
     "acreate": (player, args) => {

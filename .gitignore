@@ -7,6 +7,5 @@ conf.json
 node.dll
 server.exe
 server
-sql.sql
 .idea/
 .env

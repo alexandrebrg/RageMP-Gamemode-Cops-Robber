@@ -35,11 +35,11 @@ module.exports = {
             player.call("cJobSelection", [JSON.stringify(Config.Jobs)]);
         }
     }
-}
+};
 
 mp.events.add({
     "sSkinChange": (player, hash) => {
         player.model = hash;
         return true;
     }
-})
+});

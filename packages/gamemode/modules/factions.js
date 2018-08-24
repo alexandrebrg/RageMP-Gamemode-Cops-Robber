@@ -2,7 +2,6 @@ const DB = require('./db');
 
 let Factions = [];
 
-
 function loadFactions() {
     Factions[0] = {};
     DB.Handle.query(`Select * FROM server_factions`, function(e, result) {
@@ -35,7 +34,7 @@ module.exports.createSpawnPoint = function(posx, posy, posz, angle, faction_id) 
         if(e) return console.log(e);
     });
     return true;
-}
+};
 
 module.exports.createFaction = function(name, restricted = 0, leader, desc, cop) {
     DB.Handle.query(`INSERT INTO server_factions VALUES ("", ?, ?, ?, ?, ?)`, [name, parseInt(restricted), leader, desc, cop], function(e) {
@@ -43,7 +42,7 @@ module.exports.createFaction = function(name, restricted = 0, leader, desc, cop)
         loadFactions();
         return true;
     });
-}
+};
 
 module.exports.createPed = function(faction, hash, name) {
     DB.Handle.query(`INSERT INTO server_peds(hash, name, faction_id) VALUES (?,?,?)`, [parseInt(hash), name, parseInt(faction)], function(e) {
@@ -51,40 +50,40 @@ module.exports.createPed = function(faction, hash, name) {
         loadFactions();
         return true;
     });
-}
+};
 
 module.exports.isFactionCops = function(id) {
-    return (Factions[id]['cop']) ? true : false;
-}
+    return !!(Factions[id]['cop']);
+};
 
 module.exports.randomSpawn = function(faction_id) {
     return Factions[faction_id]['pos'][Math.floor(Math.random() * (Factions[faction_id]['pos'].length))];
-}
+};
 
 module.exports.isFactionRestricted = function(id) {
-    return (Factions[id]['restricted'] == 1);
-}
+    return (Factions[id]['restricted'] === 1);
+};
 
 module.exports.getFactionData = function() {
     return Factions;
-}
+};
 
 module.exports.isFactionIDCorrect = function(id) {    
     return ( typeof Factions[id] !== 'undefined' );
-}
+};
 
 module.exports.getFactionName = function(id) {
     return Factions[id]['name'];
-}
+};
 
 
-module.exports.Init = function() {
+module.exports.Init =  function() {
     DB.Handle.query(`CREATE TABLE IF NOT EXISTS server_factions (
         id int(11) NOT NULL,
         name varchar(24) NOT NULL UNIQUE,
         restricted int NOT NULL DEFAULT 0,
         leader varchar(128) NOT NULL DEFAULT 'NoOne',
-        desc varchar(128) NOT NULL DEFAULT 'A new gang is in town baby',
+        \`desc\` varchar(128) NOT NULL DEFAULT 'A new gang is in town baby',
         cop int(11) NOT NULL DEFAULT 0,
         default_car varchar(54) NOT NULL DEFAULT 'exemplar'
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;`, function() { } );
@@ -110,7 +109,6 @@ module.exports.Init = function() {
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1`);
     DB.Handle.query("ALTER TABLE `server_peds` ADD PRIMARY KEY (`id`);", function() { } );
     DB.Handle.query("ALTER TABLE `server_peds` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;", function() { } );
-    
 
     loadFactions();
-}
+};

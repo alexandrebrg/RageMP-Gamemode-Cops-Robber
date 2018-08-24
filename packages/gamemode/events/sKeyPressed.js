@@ -1,11 +1,11 @@
 const Players = require('../modules/players');
-const PM = require('../messages/player.json')
-const Factions = require('../modules/factions')
-const Ammunation = require('../data/ammunation.json')
+const PM = require('../messages/player.json');
+const Factions = require('../modules/factions');
+const Ammunation = require('../data/ammunation.json');
 
 module.exports = {
     "sKeyPressed" : (player, key) => {
-        if(key=="Y") {
+        if(key === "Y") {
 
             let done = false;
             mp.markers.forEachInRange(player.position, 3, (b) => {
@@ -21,10 +21,10 @@ module.exports = {
                     return false;
                 }
                 else if(b.store && b.robbed) {
-                    player.notify("~r~(!) ~w~Store already robbed, wait some time!");
+                    player.notify(PM.StoreAlreadyRobbed);
                 }
-                else if(b.teleporter && b.dimension == player.dimension && !done) {
-                    if(b.faction != 1 && Players.PlayerHaveAccess(player.ID, b.faction) && !player.adminID) return player.notify(PM.AccessTP)
+                else if(b.teleporter && b.dimension === player.dimension && !done) {
+                    if(b.faction !== 1 && Players.PlayerHaveAccess(player.ID, b.faction) && !player.adminID) return player.notify(PM.AccessTP)
                     player.call("fadeOut");
                     setTimeout(function() {
                         let veh;
@@ -42,8 +42,7 @@ module.exports = {
                         }
                         player.heading = b.to_angle;
                         player.call("fadeIn");
-                    }, 1000)
-
+                    }, 1000);
 
                     done = true;
                     return false;
@@ -60,9 +59,7 @@ module.exports = {
                 } else if(b.carShop){                         
                     mp.events.call("showVehicleShop", player, b.carShopType);
                 }
-                
             });
-            
         }
     }
-}
+};

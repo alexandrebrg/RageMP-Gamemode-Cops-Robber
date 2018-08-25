@@ -66,7 +66,7 @@ mp.events.add("MB_Hide",  (ped) => {
     Mugboards[ped.handle].textHandle = null;
     Mugboards[ped.handle].scaleformHandle = null;
     Mugboards[ped.handle].renderTargetID = null;
-    Mugboards[ped.handle]
+    delete Mugboards[ped.handle]
 
     ped.stopAnimTask(scriptConst.animDictionary, scriptConst.animName, -4.0);
     if (mp.game.streaming.hasAnimDictLoaded(scriptConst.animDictionary)) mp.game.streaming.removeAnimDict(scriptConst.animDictionary);

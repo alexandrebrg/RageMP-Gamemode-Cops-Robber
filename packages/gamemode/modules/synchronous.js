@@ -36,5 +36,5 @@ mp.events.add({
         mp.players.forEach(player => {
             player.call('Sync_PutPedInVehicle', [name, vehicle, seat]);
         });
-    }}
+    }
 });

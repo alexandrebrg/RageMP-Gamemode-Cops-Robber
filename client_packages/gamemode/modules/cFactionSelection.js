@@ -50,7 +50,7 @@ function AddInstructionalStart()
     mp.game.graphics.popScaleformMovieFunctionVoid();
 }
 
-function AddInstructionalButton(text, button) //this shit brazy
+function AddInstructionalButton(text, button) 
 {
 	mp.game.graphics.pushScaleformMovieFunction(sc, "SET_DATA_SLOT");
     mp.game.graphics.pushScaleformMovieFunctionParameterInt(scInst);
@@ -108,25 +108,32 @@ function FactionSelectionPutCameraOnPed(factionid) {
     cCurrentFaction = factionid;
     if(!creatorCamera) {
         creatorCamera = camManager.createCamera('selectFaction', 'default', new mp.Vector3(faction.ped.position.x + creatorCoords.differenceCamX, faction.ped.position.y + creatorCoords.differenceCamY, faction.ped.position.z + creatorCoords.differenceCamZ), new mp.Vector3(creatorCoords.differenceCamRX, 0, creatorCoords.differenceCamRZ), 50)
-        mp.events.call("cPedTitle", faction.name, faction.desc, (faction.cop));
-        return creatorCamera.setActiveCamera(true);
+        creatorCamera.setActiveCamera(true);
+    } else {
+        camManager.setActiveCameraWithInterp(creatorCamera, new mp.Vector3(faction.ped.position.x + creatorCoords.differenceCamX, faction.ped.position.y + creatorCoords.differenceCamY, faction.ped.position.z + creatorCoords.differenceCamZ), new mp.Vector3(creatorCoords.differenceCamRX, 0, creatorCoords.differenceCamRZ), 1500, 0, 0);
     }
-    camManager.setActiveCameraWithInterp(creatorCamera, new mp.Vector3(faction.ped.position.x + creatorCoords.differenceCamX, faction.ped.position.y + creatorCoords.differenceCamY, faction.ped.position.z + creatorCoords.differenceCamZ), new mp.Vector3(creatorCoords.differenceCamRX, 0, creatorCoords.differenceCamRZ), 1500, 0, 0);
-    mp.events.call("cPedTitle", faction.name, faction.desc, (faction.cop));
+    mp.events.call("cPedTitle", faction.name, faction.desc, (faction.cop));    
+    mp.game.mugboard.show(cFactionData[factionid].ped, cFactionData[factionid].peds[ cFactionData[factionid].currentPed ].name, "", cFactionData[factionid].name, "")
 }
 
 function FactionSelectionNextSkin() {
     var peds = cFactionData[cCurrentFaction]['peds'];
     var currentPed = cFactionData[cCurrentFaction].currentPed;
     cFactionData[cCurrentFaction].currentPed =  currentPed >= peds.length-1 ? 0 : currentPed + 1;
+    let oldPed = cFactionData[cCurrentFaction].ped;
+    mp.game.mugboard.hide(oldPed);
     FactionSelectionCreatePed(cCurrentFaction, cFactionData[cCurrentFaction].currentPed);
+    mp.game.mugboard.show(cFactionData[cCurrentFaction].ped, cFactionData[cCurrentFaction].peds[ cFactionData[cCurrentFaction].currentPed ].name, "", cFactionData[cCurrentFaction].name, "")
 }
 
 function FactionSelectionPreviousSkin() {
     var peds = cFactionData[cCurrentFaction]['peds'];
     var currentPed = cFactionData[cCurrentFaction].currentPed;
     cFactionData[cCurrentFaction].currentPed =  currentPed == 0 ? peds.length - 1: currentPed - 1;
+    let oldPed = cFactionData[cCurrentFaction].ped;
+    mp.game.mugboard.hide(oldPed);
     FactionSelectionCreatePed(cCurrentFaction, cFactionData[cCurrentFaction].currentPed);
+    mp.game.mugboard.show(cFactionData[cCurrentFaction].ped, cFactionData[cCurrentFaction].peds[ cFactionData[cCurrentFaction].currentPed ].name, "", cFactionData[cCurrentFaction].name, "")
 }
 
 function FactionSelectionCreatePed(factionid, pedid) {

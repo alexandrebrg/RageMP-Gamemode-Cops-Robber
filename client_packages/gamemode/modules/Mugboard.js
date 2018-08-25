@@ -23,8 +23,8 @@ mp.events.add("MB_Show", (ped, title, topText, midText, bottomText, rank = -1) =
             scaleformHandle: null,
             renderTargetID: null
         };
-        mugboard.boardHandle = mp.objects.new(mp.game.joaat(scriptConst.boardPropName), ped.position, new mp.Vector3(), 255, 0);
-        mugboard.textHandle = mp.objects.new(mp.game.joaat(scriptConst.textPropName), ped.position, new mp.Vector3(), 255, 0);
+        mugboard.boardHandle = mp.objects.new(mp.game.joaat(scriptConst.boardPropName), ped.position, new mp.Vector3(), 100, mp.players.local.dimension);
+        mugboard.textHandle = mp.objects.new(mp.game.joaat(scriptConst.textPropName), ped.position, new mp.Vector3(), 255, mp.players.local.dimension);
 
         // load scaleform & set up the content
         mugboard.scaleformHandle = mp.game.graphics.requestScaleformMovie("mugshot_board_01");
@@ -54,7 +54,6 @@ mp.events.add("MB_Show", (ped, title, topText, midText, bottomText, rank = -1) =
         ped.taskPlayAnim(scriptConst.animDictionary, scriptConst.animName, 8.0, -8.0, -1, 1, 0.0, false, false, false);
         Mugboards[ped.handle] = mugboard;
         hasMugshotBoard = true;
-        mp.gui.chat.push("" + ped.handle);
     }
 });
 

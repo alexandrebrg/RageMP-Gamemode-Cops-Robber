@@ -46,3 +46,4 @@
   - Factions have a default cars, defined as logo for faction selection
   - Fix teleporter crash bug
   - Password are now encrypted with BCrypt
+  - Account are not linked to a playername anymore, but to a email adress and its password

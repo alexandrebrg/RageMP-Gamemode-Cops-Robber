@@ -48,3 +48,4 @@
   - Password are now encrypted with BCrypt
   - Account are not linked to a playername anymore, but to a email adress and its password
   - Peds are holding MugBoard in faction selection
+  - Add Peds Synchro system

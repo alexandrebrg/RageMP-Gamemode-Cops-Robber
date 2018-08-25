@@ -26,3 +26,4 @@ require ('./gamemode/modules/cVehicle.js');
 
 require ('./gamemode/modules/cFactionSelection.js');
 
+require('./gamemode/modules/Synchronous.js')

@@ -227,22 +227,31 @@ mp.events.add({
         misc.injectCef("showError");
     },
     "cFactionSelectionDone" : () => {
-        mp.game.ui.displayHud(true);
-        localPlayer.freezePosition(false);
-        localPlayer.setDefaultComponentVariation();
-        cFactionON = false;
-        mp.game.ui.displayHud(true);
-        localPlayer.freezePosition(false);
-        localPlayer.setDefaultComponentVariation();
-        mp.events.call('changeChatState', true);
-        mp.gui.chat.show(true);
-        creatorCamera.setActiveCamera(false);
-        camManager.destroyCamera(creatorCamera)
-        mp.game.ui.displayRadar(true);
-        for(var i=1;i<cFactionData.length;i++) {
-            cFactionData[i].ped.destroy();
-            cFactionData[i].veh.destroy();
-        }
+        camManager.setActiveCameraWithInterp(creatorCamera, new mp.Vector3(1327.133, 3148.955, 42), new mp.Vector3(creatorCoords.differenceCamRX, -80, creatorCoords.differenceCamRZ), 1500, 0, 0);
+        setTimeout( () => {
+            mp.events.call("fadeOut");
+        }, 1000)
+        setTimeout(() => {
+            mp.game.ui.displayHud(true);
+            localPlayer.freezePosition(false);
+            localPlayer.setDefaultComponentVariation();
+            cFactionON = false;
+            mp.game.ui.displayHud(true);
+            localPlayer.freezePosition(false);
+            localPlayer.setDefaultComponentVariation();
+            mp.events.call('changeChatState', true);
+            mp.gui.chat.show(true);
+            creatorCamera.setActiveCamera(false);
+            camManager.destroyCamera(creatorCamera)
+            mp.game.ui.displayRadar(true);
+            for(var i=1;i<cFactionData.length;i++) {
+                cFactionData[i].ped.destroy();
+                cFactionData[i].veh.destroy();
+            }            
+        }, 1500);
+        setTimeout( () => {
+            mp.events.call("fadeIn");
+        }, 2500)
     }
 });
 camManager.on('startInterp', (camera) => { 

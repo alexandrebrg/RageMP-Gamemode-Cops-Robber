@@ -15,7 +15,7 @@ mp.events.add({
     "Sync_PutPedInVehicle": (name, veh, seat) => {
         if(!name || !veh) return;
         let ped = Peds[name];
-        ped.taskEnterVehicle(veh.handle, 10000, seat, 2, 16, 0);
+        ped.taskEnterVehicle(veh.handle, -1, seat, 2, 16, 0);
     }
 
 });

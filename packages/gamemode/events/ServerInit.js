@@ -8,6 +8,7 @@ const Biz = require('../modules/business');
 const Timers = require('../modules/timers');
 const Teleporters = require('../modules/teleporters');
 const ATMs = require('../modules/atm');
+const Sync = require('../modules/synchronous')
 
 module.exports.ServerInit = function() {
     Players.Init();
@@ -29,6 +30,6 @@ module.exports.ServerInit = function() {
     Teleporters.Init();
 
     ATMs.Init();
-    
+
     console.log("Starter");
 };

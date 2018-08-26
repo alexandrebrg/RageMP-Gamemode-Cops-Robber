@@ -1,12 +1,6 @@
 const Logs = require('../modules/logs');
 const DB = require('../modules/db')
-
-function hashPassword(str) {
-    const cipher = crypto.createCipher('aes192', 'a pass');
-	let encrypted = cipher.update(str, 'utf8', 'hex'); 
-    encrypted += cipher.final('hex');
-    return encrypted;
-}
+const bcrypt = require('bcrypt-nodejs');
 
 function showSuccess(player) {
     const str = "showSuccess();";
@@ -21,10 +15,9 @@ function showError(player) {
 
 module.exports = {
     'sTryLogin' : (player, pass, email) => {
-        const hash = hashPassword(pass);
         DB.Handle.query(`SELECT password,email,id,name from server_players WHERE email = "${email}"`, function(e, result) {
             if(e) return console.log("SQL Error: " + e);
-            if (hash !== result[0]['password']) {
+            if (!bcrypt.compareSync(pass, result[0]['password'])) {
                 Logs.Insert(`${player.name} entered wrong password!`);
                 return showError(player);
             }

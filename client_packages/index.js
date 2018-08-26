@@ -1,5 +1,7 @@
 require ('/gamemode/cMisc.js');
 
+require('/gamemode/modules/Mugboard.js');
+
 require ('/gamemode/modules/cLogin.js');
 
 require ('/gamemode/scaleform_messages/index.js');
@@ -24,3 +26,4 @@ require ('./gamemode/modules/cVehicle.js');
 
 require ('./gamemode/modules/cFactionSelection.js');
 
+require('./gamemode/modules/Synchronous.js')

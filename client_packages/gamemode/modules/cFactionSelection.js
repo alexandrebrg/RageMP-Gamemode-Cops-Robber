@@ -230,7 +230,7 @@ mp.events.add({
         camManager.setActiveCameraWithInterp(creatorCamera, new mp.Vector3(1327.133, 3148.955, 42), new mp.Vector3(creatorCoords.differenceCamRX, -80, creatorCoords.differenceCamRZ), 1500, 0, 0);
         setTimeout( () => {
             mp.events.call("fadeOut");
-        }, 1000)
+        }, 500);
         setTimeout(() => {
             mp.game.ui.displayHud(true);
             localPlayer.freezePosition(false);

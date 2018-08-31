@@ -1,4 +1,4 @@
-# :police_car::car: RageMP-Gamemode-Cops-Robber *by Protocole*
+# :police_car::car: RageMP-Gamemode-Cops-Robber
 
  Cops and Robbers Gamemode for RageMP - GTA5 Mod. Developed by **Protocole**.
 

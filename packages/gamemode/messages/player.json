@@ -35,5 +35,6 @@
       "first_text": "You must be from",
       "second_text": "to drive this!",
       "admin": "~r~You enter as Admin"
-    }
+    },
+    "VehicleResellable": "This car is ~o~resellable ~w~, get to docks to sell it "
 }

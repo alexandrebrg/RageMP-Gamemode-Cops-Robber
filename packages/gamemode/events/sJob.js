@@ -16,10 +16,20 @@ const levelFromXP = (xp) => {
 module.exports = {
     
     "sJobSelection": (player, job) => {
-        if(job == 0) {
-            player.notifyWithPicture("New message", "Boss", "Hey, you're employed as hacker now, so do your job!", "CHAR_CHAT_CALL", 1, false, 0, 139);
-            player.call("showBottomText", ["Type ~r~/jobHelp~w~ to know commands!"]);
+        let string, icon;
+        if(job === 0) {
+            string = "Hey, you're employed as hacker now, so just start";
+            icon = "CHAR_CHAT_CALL";
+        } else if(job === 1) {
+            string = "You are employed as reseller, steal any car and try to sell it";
+            icon = "CHAR_PROPERTY_ARMS_TRAFFICKING";
+        } else {
+            string = "Job not defined, tell devs";
+            icon = "CHAR_BUGSTARS";
         }
+        player.notifyWithPicture("New message", "Boss", string, icon, 1, false, 0, 139);
+        player.call("showBottomText", ["Type ~r~/jobHelp~w~ to know commands!"]);
+
         Players.setPlayerJob(player.ID, job);
         player.setXP(Players.getPlayerXP(player.ID));
     },

@@ -5,7 +5,7 @@ const Labels = require('../modules/labels');
 
 let PlayersOnline = [];
 
-const Player = function(sqlID, name, email, spenttime, access, cash, bank, wantedlevel, hacker, reseller) {
+const Player = function(sqlID, name, email, spenttime, access, cash, bank, wantedlevel, xp) {
 
     this.sqlID = sqlID;
     this.name = name;
@@ -15,8 +15,7 @@ const Player = function(sqlID, name, email, spenttime, access, cash, bank, wante
     this.cash = cash;
     this.bank = bank;
     this.wantedlevel = wantedlevel;
-    this.hacker = hacker;
-    this.reseller = reseller;
+    this.xp = xp;
     
 
     this.blip = false;
@@ -258,20 +257,11 @@ module.exports.setPlayerJob = function(id, job) {
     return PlayersOnline[id].job = job;
 };
 /**
- * Get SQL field by job id
- * @param {int} id Player id
- */
-function getPlayerJobField(id) {
-    return Config.Jobs[PlayersOnline[id].job].sqlfield;
-}
-
-module.exports.getPlayerJobField = getPlayerJobField;
-/**
  * Return player XP
  * @param {int} id player ID
  */
 module.exports.getPlayerXP = function(id) {
-    return PlayersOnline[id][getPlayerJobField(id)];
+    return PlayersOnline[id]["xp"];
 };
 /**
  * Add xp to player NOT SET
@@ -279,7 +269,7 @@ module.exports.getPlayerXP = function(id) {
  * @param {int} xp XP Amount
  */
 module.exports.changeXP = function(id, xp) {
-    return PlayersOnline[id][getPlayerJobField(id)] += xp;
+    return PlayersOnline[id]["xp"] += xp;
 
 };
 /**
@@ -288,7 +278,7 @@ module.exports.changeXP = function(id, xp) {
  * @param {int} xp xp amount
  */
 module.exports.setXP = function(id, xp) {
-    return PlayersOnline[id][getPlayerJobField(id)] = xp;
+    return PlayersOnline[id]["xp"] = xp;
 };
 /**
  * Update player spent time to all players
@@ -349,7 +339,7 @@ module.exports.CreatePlayerClass = function(sqlid, name, email) {
     DB.Handle.query(`SELECT * from server_players WHERE id = ${sqlid}`, function(e, result){
         if(e) return console.log(e);
         result = result[0];
-        var playa = new Player(sqlid, name, email, result['spenttime'], [], result['cash'], result['bank'], result['wantedlevel'], result['hacker'], result['reseller']);
+        var playa = new Player(sqlid, name, email, result['spenttime'], [], result['cash'], result['bank'], result['wantedlevel'], result['xp']);
         PlayersOnline [ playa.ID ] = playa;
         mp.players[playa.ID].ID = playa.ID;
         SetPlayerAccess(playa.ID);
@@ -441,8 +431,7 @@ module.exports.Init = function() {
         bank bigint NOT NULL DEFAULT 10000,
         wantedlevel int NOT NULL DEFAULT 0,
         jail INT NOT NULL DEFAULT 0,
-        hacker int NOT NULL DEFAULT 0,
-        reseller INT NOT NULL DEFAULT 0
+        xp int NOT NULL DEFAULT 0
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;`, function() { } );
     DB.Handle.query("ALTER TABLE `server_players` ADD PRIMARY KEY (`id`);", function() { } );
     DB.Handle.query("ALTER TABLE `server_players` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;", function() { } );

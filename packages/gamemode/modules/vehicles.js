@@ -1,8 +1,18 @@
 const DB = require('./db');
 const Veh_Hashes = require('../data/vehicle_hashes');
 const Config = require('../data/config.json');
+const default_veh = require('../data/default_vehicle.json');
 
 let Vehicles = [];
+
+function pickRandomVehicle(obj) {
+    let result;
+    let count = 0;
+    for (var prop in obj)
+        if (Math.random() < 1/++count && [6,7,10,11,13,14,15,16,17,18,19,21].indexOf(Veh_Hashes[prop].vehicleClass) === -1 && Veh_Hashes[prop].manufacturerName !== "")
+           result = prop;
+    return result;
+}
 /**
  * load all vehicle (Only local)
  */
@@ -12,7 +22,29 @@ function loadVehicles() {
         for(var i =0; i<result.length; i++) {
             spawnVeh(i, result[i]);
         };
-    })
+    });
+    for(var key in default_veh) {
+        let veh, e;
+        veh = pickRandomVehicle(Veh_Hashes);       
+            
+        e = default_veh[key];
+        spawnVeh(Vehicles.length, {
+            "name": veh,
+            "posx": e.position.x,
+            "posy": e.position.y,
+            "posz": e.position.z,
+            "color": 0,
+            "color1": 0,
+            "color2": 0,
+            "angle": e.heading,
+            "locked": 0,
+            "plate": "Civil",
+            "dimension": Config.defaultDimension,
+            "faction_id": 1,
+            "id": null,
+            "temp": true
+        })
+    }
 }
 /**
  * Spawn vehicle from veh datas
@@ -35,7 +67,8 @@ function spawnVeh(id, veh) {
     Vehicles[id].sqlid = veh.id;
     Vehicles[id].faction_id = veh.faction_id;
     Vehicles[id].modelName = veh.name;
-    setVehMods(veh.id);   
+    if(veh.temp) Vehicles[id].temp= true;
+    if(!veh.temp) setVehMods(veh.id);   
     return true;
 }
 

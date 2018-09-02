@@ -49,3 +49,6 @@
   - Account are not linked to a playername anymore, but to a email adress and its password
   - Peds are holding MugBoard in faction selection
   - Add Peds Synchro system
+  - Civils vehicles change of model everytime the server restart
+  - Civils vehicle can be found everywhere inTown
+  - Create Reseller job (Sell civil / bought cars)

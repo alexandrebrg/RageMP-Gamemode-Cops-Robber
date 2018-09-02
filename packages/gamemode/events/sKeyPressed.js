@@ -58,6 +58,8 @@ module.exports = {
                     mp.events.call("showVehicleCustom", player, b.customID);
                 } else if(b.carShop){                         
                     mp.events.call("showVehicleShop", player, b.carShopType);
+                } else if(b.reseller) {
+                    mp.events.call("resellCar", player);
                 }
             });
         }

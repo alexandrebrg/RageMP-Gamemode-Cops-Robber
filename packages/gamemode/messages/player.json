@@ -36,5 +36,6 @@
       "second_text": "to drive this!",
       "admin": "~r~You enter as Admin"
     },
-    "VehicleResellable": "This car is ~o~resellable ~w~, get to docks to sell it "
+    "VehicleResellable": "This car is ~o~resellable ~w~, get to docks to sell it ",
+    "JobNotAllowed": "Your job doesn't allow you to do this!"
 }

@@ -489,7 +489,10 @@ module.exports.Init = function() {
             color: 4,
             name: carshop.Name
         });
-        Labels.createLabelOffline("Press ~b~Y~w~ to enter in the ~p~Shop", new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), Config.defaultDimension);
-    
+        Labels.createLabelOffline("Press ~b~Y~w~ to enter in the ~p~Shop", new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), Config.defaultDimension);    
     }
+    marker = mp.markers.new(1, new mp.Vector3(1056.49, -1981.83, 29.6214427), 3, {
+        color: [0,0,125],
+        dimension: Config.defaultDimension
+    })
 };

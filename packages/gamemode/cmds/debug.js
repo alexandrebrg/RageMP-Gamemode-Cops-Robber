@@ -1,7 +1,17 @@
 const adminMessage = require('../messages/admin.json');
+let default_veh = require('../data/default_vehicle.json');
+
 module.exports = {
     "test": (player, args) => {
-        player.health = -1;
+        player.call("test");
+    },
+    "createSP": (player, args) => {
+        let fs = require('fs');
+        let p = JSON.parse(fs.readFileSync('packages/gamemode/data/default_vehicle.json').toString());
+        let m = {}
+        m = p;
+        m[Object.keys(p).length] = {"position":player.vehicle.position,"heading":player.vehicle.heading};
+        fs.writeFile('packages/gamemode/data/default_vehicle.json', JSON.stringify(m), (e) => { if(e) console.log(e) });
     },
     "getdim": (player) => {
         player.outputChatBox("Your dimension: " + player.dimension)

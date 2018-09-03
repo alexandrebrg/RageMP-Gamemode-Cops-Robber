@@ -81,5 +81,9 @@ module.exports = {
             player.call("ShowShardMessage", ["~g~Success!", "Your vehicle is waiting for you at the waypoint on your minimap!"])
             player.call("setWaypoint", [randomPos.x, randomPos.y])
         } else { player.notify(PM.VehicleBuyNotEnoughMoney); }
+    },
+    "vehicleDeath": (vehicle) => {
+        vehicle.destroy();
+        console.log(vehicle);
     }
 }

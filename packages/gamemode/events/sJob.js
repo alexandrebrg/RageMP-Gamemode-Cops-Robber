@@ -3,6 +3,8 @@ const requiredExperiences = require("../data/xpdata"); // 8000 levels from GTA O
 const maxLevel = requiredExperiences.length - 1;
 const maxExperience = requiredExperiences[maxLevel];
 const Config = require('../data/config.json');
+const PM = require('../messages/player.json')
+const carPrices = require('../data/vehicle_shop.json');
 
 const clamp = (value, min, max) => {
     return value <= min ? min : value >= max ? max : value;
@@ -118,6 +120,22 @@ module.exports = {
         player.changeXP(500)
         player.updateWantedLevel(1);
         
+    },
+    "resellCar": (player) => {
+        if(Players.getPlayerJob(player.ID) !== 1) return player.notify(PM.JobNotAllowed);
+        if(!player.vehicle) return player.notify(PM.MustBeInVehicle);
+        for(var key in carPrices) {
+            let vehClass = parseInt(key);
+            if([20,21].indexOf(vehClass) !== -1) continue;
+            for(var veh in carPrices[key]) {
+                if(carPrices[key][veh].hash == player.vehicle.model) {
+                    mp.events.call("sCashUpdate", player,carPrices[key][veh].price / 10);
+                    player.vehicle.locked = true;
+                    player.removeFromVehicle();                    
+                    break;
+                }
+            }
+        }
     }
 }
 

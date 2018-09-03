@@ -491,8 +491,16 @@ module.exports.Init = function() {
         });
         Labels.createLabelOffline("Press ~b~Y~w~ to enter in the ~p~Shop", new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), Config.defaultDimension);    
     }
+    // Reseller job
     marker = mp.markers.new(1, new mp.Vector3(1056.49, -1981.83, 29.6214427), 3, {
         color: [0,0,125],
         dimension: Config.defaultDimension
-    })
+    });
+    marker.reseller = true;
+    blip = mp.blips.new(89, new mp.Vector3(1056.49, -1981.83, 29.6214427), {
+        dimension: Config.defaultDimension,
+        color: 4,
+        name: "Charle's Car Reseller"
+    });
+    Labels.createLabelOffline("Press ~b~Y~w~ to ~o~sell~w~ your car", new mp.Vector3(1056.49, -1981.83, 30.6214427), Config.defaultDimension);    
 };

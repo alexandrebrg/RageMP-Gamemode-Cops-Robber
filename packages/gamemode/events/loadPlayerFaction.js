@@ -20,20 +20,22 @@ module.exports = {
         }
         player.dimension = Config.defaultDimension;
         player.call('cFactionSelectionDone');
-        mp.events.call("sCashInit", player, Players.getPlayerCash(player.ID));
+        setTimeout(() => {
+            mp.events.call("sCashInit", player, Players.getPlayerCash(player.ID));
 
-        spawnpoint = Factions.randomSpawn(ped.faction_id);
-        player.position = new mp.Vector3(spawnpoint['posx'], spawnpoint['posy'], spawnpoint['posz']);
-        player.heading = spawnpoint['angle'];
-        player.model =ped.hash;
+            spawnpoint = Factions.randomSpawn(ped.faction_id);
+            player.position = new mp.Vector3(spawnpoint['posx'], spawnpoint['posy'], spawnpoint['posz']);
+            player.heading = spawnpoint['angle'];
+            player.model =ped.hash;
 
-        player.call('setWantedLevel', [Players.getPlayerWantedLevel(player.ID)]);
+            player.call('setWantedLevel', [Players.getPlayerWantedLevel(player.ID)]);
 
-        player.robbery = {};        
-        Players.setPlayerBlips(player.id);
-        if(!Factions.isFactionCops(ped.faction_id)) {
-            player.call("cJobSelection", [JSON.stringify(Config.Jobs)]);
-        }
+            player.robbery = {};        
+            Players.setPlayerBlips(player.id);
+            if(!Factions.isFactionCops(ped.faction_id)) {
+                player.call("cJobSelection", [JSON.stringify(Config.Jobs)]);
+            }
+        }, 2500);
     }
 };
 

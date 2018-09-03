@@ -248,7 +248,7 @@ mp.events.add({
                 cFactionData[i].ped.destroy();
                 cFactionData[i].veh.destroy();
             }            
-        }, 1500);
+        }, 2500);
         setTimeout( () => {
             mp.events.call("fadeIn");
         }, 2500)

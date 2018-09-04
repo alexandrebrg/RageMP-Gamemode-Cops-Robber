@@ -2,6 +2,7 @@ const DB = require('./db');
 const Factions = require('./factions');
 const Config = require('../data/config.json');
 const Labels = require('../modules/labels');
+const GamePOI = require('../modules/gamepoi')
 
 let PlayersOnline = [];
 
@@ -445,62 +446,33 @@ module.exports.Init = function() {
 
     for(let key in Config.Arrests){
         ap = Config.Arrests[key];
-        marker = mp.markers.new(1, new mp.Vector3(ap.Position.x , ap.Position.y,ap.Position.z-1), 3, {
-            color: [15,0,255, 125],
-            dimension: Config.defaultDimension
-        });
-        marker.arrest = true;
-        blip = mp.blips.new(188, new mp.Vector3(ap.Position.x , ap.Position.y,ap.Position.z), {
-            dimension: Config.defaultDimension,
-            color: 1,
-            name: "Arrest Point"
-        });
         Labels.createLabelOffline("Press ~b~Y~w~ to arrest any ~r~cuffed~w~ player", new mp.Vector3(ap.Position.x , ap.Position.y,ap.Position.z), Config.defaultDimension);
+        let item = new GamePOI(new mp.Vector3(ap.Position.x , ap.Position.y,ap.Position.z), 3, {arrest: true});
+        item.createMarker(1, {color: [15,0,255,125], dimension: Config.defaultDimension});
+        item.createBlip(188, 1, "Arrest Point");
     }
 
     // VEHICLE LS CUSTOM MARKER
     for(let key in Config.Customs){
         custom = Config.Customs[key];
-        marker = mp.markers.new(1, new mp.Vector3(custom.Position.x, custom.Position.y, custom.Position.z -1), 3, {
-            color: [15,0,255, 125],
-            dimension: Config.defaultDimension
-        });
-        marker.custom = true;
-        marker.customID = parseInt(key);
-        blip = mp.blips.new(72, new mp.Vector3(custom.Position.x, custom.Position.y, custom.Position.z ), {
-            dimension: Config.defaultDimension,
-            color: 4,
-            name: "Vehicle Custom"
-        });
-        Labels.createLabelOffline("Press ~b~Y~w~ to enter in the ~p~Custom", new mp.Vector3(custom.Position.x, custom.Position.y, custom.Position.z ), Config.defaultDimension);
+        let item = new GamePOI(new mp.Vector3(custom.Position.x, custom.Position.y, custom.Position.z), 3, {custom: true, customID: parseInt(key)});
+        item.createMarker(1, {color: [15,0,255,125]});
+        item.createColshape("circle", true);
+        item.createBlip(72, 4, "Vehicle Custom");
     }
 
     for(let key in Config.CarShop) {
         if(typeof Config.CarShop[key].Position === "undefined") continue;
         carshop = Config.CarShop[key];
-        marker = mp.markers.new(1, new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z -1), 3, {
-            color: [15,0,255, 125],
-            dimension: Config.defaultDimension
-        });
-        marker.carShop = true;
-        marker.carShopType = key;
-        blip = mp.blips.new(carshop.Blip, new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), {
-            dimension: Config.defaultDimension,
-            color: 4,
-            name: carshop.Name
-        });
-        Labels.createLabelOffline("Press ~b~Y~w~ to enter in the ~p~Shop", new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), Config.defaultDimension);    
+        Labels.createLabelOffline(carshop.Name, new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), Config.defaultDimension);   
+        let item = new GamePOI(new mp.Vector3(carshop.Marker.x, carshop.Marker.y, carshop.Marker.z ), 3, {carShop: true, carShopType: key});
+        item.createMarker(1, {color: [15,0,255,125]});
+        item.createBlip(carshop.Blip, 4, carshop.Name); 
+        item.createColshape("circle", true);
     }
     // Reseller job
-    marker = mp.markers.new(1, new mp.Vector3(1056.49, -1981.83, 29.6214427), 3, {
-        color: [0,0,125],
-        dimension: Config.defaultDimension
-    });
-    marker.reseller = true;
-    blip = mp.blips.new(89, new mp.Vector3(1056.49, -1981.83, 29.6214427), {
-        dimension: Config.defaultDimension,
-        color: 4,
-        name: "Charle's Car Reseller"
-    });
     Labels.createLabelOffline("Press ~b~Y~w~ to ~o~sell~w~ your car", new mp.Vector3(1056.49, -1981.83, 30.6214427), Config.defaultDimension);    
+    let item = new GamePOI(new mp.Vector3(1056.49, -1981.83, 30.6214427), 3,{reseller: true});
+    item.createMarker(1);
+    item.createBlip(89, 4, "Charle's Car Reseller");
 };

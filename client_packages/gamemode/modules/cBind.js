@@ -38,4 +38,3 @@ mp.keys.bind(0x0D, false, function() { // Enter
     if(mp.players.local.chatState) mp.players.local.chatState = false;
 });
 
-

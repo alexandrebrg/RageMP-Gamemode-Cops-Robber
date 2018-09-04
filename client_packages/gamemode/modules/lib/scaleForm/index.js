@@ -86,7 +86,4 @@ module.export = class {
     	mp.game.graphics.drawScaleformMovieFullscreen(this._handle, 255, 255, 255, 255, false);
     }
 
-    NoNeeded() {
-    	mp.game.graphics.setScaleformMovieAsNoLongerNeeded(this._handle)
-    }
 }

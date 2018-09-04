@@ -1,0 +1,8 @@
+[
+    {
+        "areaname": "Los Santos Bank",
+        "cameras": [
+            {"x": 50, "y": 50, "z": 50, "rx": 50, "ry": 50, "rz":50, "details": "Int Center"}
+        ]
+    }
+]

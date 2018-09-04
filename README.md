@@ -52,3 +52,7 @@
   - Civils vehicles change of model everytime the server restart
   - Civils vehicle can be found everywhere inTown (~60 cars)
   - Create Reseller job (Sell civil / bought cars)
+
+  
+## :star: New Update
+  - New civil vehicle system (Fixing bugs aswell)

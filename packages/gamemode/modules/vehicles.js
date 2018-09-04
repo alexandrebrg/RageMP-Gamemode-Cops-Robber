@@ -5,14 +5,6 @@ const default_veh = require('../data/default_vehicle.json');
 
 let Vehicles = [];
 
-function pickRandomVehicle(obj) {
-    let result;
-    let count = 0;
-    for (var prop in obj)
-        if (Math.random() < 1/++count && [6,7,10,11,13,14,15,16,17,18,19,21].indexOf(Veh_Hashes[prop].vehicleClass) === -1 && Veh_Hashes[prop].manufacturerName !== "")
-           result = prop;
-    return result;
-}
 /**
  * load all vehicle (Only local)
  */
@@ -23,9 +15,17 @@ function loadVehicles() {
             spawnVeh(i, result[i]);
         };
     });
+
+    // Init vehicle filtering for random spawning
+    let VehNames = Object.keys(Veh_Hashes);
+    for(var i =  0; i < VehNames.length; i++) {
+        let veh = Veh_Hashes[ VehNames[i] ];
+        if([6,7,10,11,13,14,15,16,17,18,19,21].indexOf(veh.vehicleClass) !== -1 || veh.manufacturerName === "") delete VehNames[i];
+    }
+    VehNames = VehNames.filter(veh => veh);
     for(var key in default_veh) {
         let veh, e;
-        veh = pickRandomVehicle(Veh_Hashes);       
+        veh = Veh_Hashes[ ( VehNames )[ Math.floor(VehNames.length * Math.random()) ] ].name;       
             
         e = default_veh[key];
         spawnVeh(Vehicles.length, {

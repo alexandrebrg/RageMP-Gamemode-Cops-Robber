@@ -3,7 +3,7 @@ let default_veh = require('../data/default_vehicle.json');
 
 module.exports = {
     "test": (player, args) => {
-        player.call("test");
+        mp.events.call("initCamSystem", player,0)
     },
     "createSP": (player, args) => {
         let fs = require('fs');

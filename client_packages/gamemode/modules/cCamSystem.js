@@ -1,33 +1,32 @@
-const scaleForm = require('/gamemode/modules/lib/scaleForm/');
+const scaleForm = require('/gamemode/modules/lib/scaleForm');
 const camerasManager = require('/gamemode/modules/lib/camerasManager')
 let IsInCamSystem = false;
-let CamSystemScaleForm;
-let CamSystemIntruct;
+
+let CamSystemScaleForm = new scaleForm("security_cam");
+let CamSystemIntruct = new scaleForm("instructional_buttons");
 let CamSystemActual  = 0;
 let camData = {};
-let CamSystemCamera;
+let CamSystemCamera = false;
 
 function CamSystemSetCam(camID) {
     let cam = camData[camID];
     CamSystemScaleForm.callFunction("SET_DETAILS", cam.details);
     if(CamSystemCamera){
-        CarSystemCamera.setActiveCamera(false);
+        CamSystemCamera.setActiveCamera(false);
         camerasManager.destroyCamera("camSystem");
     }
-    CamSystemCamera = camerasManager.createCamera("camSystem", "default", new mp.Vector3(cam.x, cam.y, cam.z), new mp.Vector3(cam.rx, cam.ry, cam.rz), 120, false)
-    CarSystemCamera.setActiveCamera(true);
+    CamSystemCamera = camerasManager.createCamera("camSystem", "default", new mp.Vector3(cam.x, cam.y, cam.z), new mp.Vector3(cam.rx, cam.ry, cam.rz), 50, false)
+    CamSystemCamera.setActiveCamera(true);
 }
 
 
 mp.events.add({
-    "initCamSystem": (camData) => {
-        CamSystemScaleForm = new scaleForm("security_camera");
-        CamSystemIntruct = new scaleForm("instructional_buttons");
-        camData = camData.cameras;
+    "initCamSystem": (camDatas) => {
 
         // Security Cam
-        CamSystemScaleForm.callFunction("SET_LOCATION", camData.areaname)
+        CamSystemScaleForm.callFunction("SET_LOCATION", camDatas.areaname)
         CamSystemScaleForm.callFunction("SET_TIME", 13,13);
+        camData = camDatas.cameras;
 
         // Instructionals
         CamSystemIntruct.callFunction("SET_DATA_SLOT_EMPTY");
@@ -41,21 +40,22 @@ mp.events.add({
 
     // Show the scaleform
     "render": () => {
-        if(IsInCamSystem)
+        if(IsInCamSystem) {
             CamSystemScaleForm.renderFullScreen();
             CamSystemIntruct.render2D(0,0,1280,720);
+        }
     }
 });
 
 mp.keys.bind(0x44, false, () => { // D Next Camera
     if(!IsInCamSystem)
         return;
-    CamSystemActual = CamSystemActual.length === CamSystemActual - 1 ? 0 : CamSystemActual + 1;
+    CamSystemActual = camData.length-1 === CamSystemActual  ? 0 : CamSystemActual + 1;
     CamSystemSetCam(CamSystemActual);
 });
 mp.keys.bind(0x51, false, () => { // Q Previous Camera
     if(!IsInCamSystem)
         return;
-    CamSystemActual = C0 === CamSystemActual ? CamSystemActual.length -1 : CamSystemActual - 1;
+    CamSystemActual = 0 === CamSystemActual ? camData.length -1 : CamSystemActual - 1;
     CamSystemSetCam(CamSystemActual);
 });

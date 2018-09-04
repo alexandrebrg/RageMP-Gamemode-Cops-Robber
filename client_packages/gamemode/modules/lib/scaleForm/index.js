@@ -1,4 +1,4 @@
-module.export = class {
+exports = class {
     constructor(scaleformStr) {
         this._handle = mp.game.graphics.requestScaleformMovie(scaleformStr);
         this.queueCallFunction = new Map();

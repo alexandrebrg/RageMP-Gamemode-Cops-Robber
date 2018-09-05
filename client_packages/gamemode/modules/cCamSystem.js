@@ -2,7 +2,7 @@ const scaleForm = require('/gamemode/modules/lib/scaleForm');
 const camerasManager = require('/gamemode/modules/lib/camerasManager')
 let IsInCamSystem = false;
 
-let CamSystemScaleForm = new scaleForm("security_cam");
+let CamSystemScaleForm = new scaleForm("traffic_cam");
 let CamSystemIntruct = new scaleForm("instructional_buttons");
 let CamSystemActual  = 0;
 let camData = {};
@@ -24,20 +24,22 @@ mp.events.add({
     "initCamSystem": (camDatas) => {
 
         // Security Cam
-        CamSystemScaleForm.callFunction("SET_LOCATION", camDatas.areaname)
-        CamSystemScaleForm.callFunction("SET_TIME", 13, 13);
+        CamSystemScaleForm.callFunction("SET_LAT_LONG", 27, 07, 14, 23)
+        CamSystemScaleForm.callFunction("SET_CAM_DATE", 2, 16, 15);
         CamSystemScaleForm.callFunction("PLAY_CAM_MOVIE");
         camData = camDatas.cameras;
 
         // Instructionals
         CamSystemIntruct.callFunction("SET_DATA_SLOT_EMPTY");
-        CamSystemIntruct.callFunction("SET_DATA_SLOT", 0, "t_D", "Next Camera");
-        CamSystemIntruct.callFunction("SET_DATA_SLOT", 1,  "t_Q", "Previous Camera");
+        CamSystemIntruct.callFunction('CLEAR_BACKGROUNDS');
+        CamSystemIntruct.callFunction("SET_DATA_SLOT", 0, "t_F", "Leave");
+        CamSystemIntruct.callFunction("SET_DATA_SLOT", 1, "t_D", "Next Camera");
+        CamSystemIntruct.callFunction("SET_DATA_SLOT", 2,  "t_Q", "Previous Camera");
 
         CamSystemIntruct.callFunction("DRAW_INSTRUCTIONAL_BUTTONS", -1);
         CamSystemSetCam(0);
         IsInCamSystem = true;  
-
+        
         mp.gui.chat.show(false);
         mp.game.ui.displayRadar(false);
     },
@@ -46,7 +48,7 @@ mp.events.add({
     "render": () => {
         if(IsInCamSystem) {
             CamSystemScaleForm.renderFullScreen();
-            CamSystemIntruct.render2D(0,0,1280,720);
+            CamSystemIntruct.renderFullScreen();
         }
     }
 });
@@ -62,4 +64,19 @@ mp.keys.bind(0x51, false, () => { // Q Previous Camera
         return;
     CamSystemActual = 0 === CamSystemActual ? camData.length -1 : CamSystemActual - 1;
     CamSystemSetCam(CamSystemActual);
+});
+mp.keys.bind(0x46, false, () => {
+    if(!IsInCamSystem)
+        return;
+    CamSystemScaleForm.dispose();    
+    setTimeout( () => { CamSystemScaleForm = new scaleForm("traffic_cam"); }, 10);
+    setTimeout( () => { 
+        CamSystemScaleForm.dispose(); 
+        CamSystemIntruct.dispose();
+        IsInCamSystem = false; 
+        CamSystemCamera.setActiveCamera(false);
+        camerasManager.destroyCamera("camSystem");
+        mp.gui.chat.show(true);
+        mp.game.ui.displayRadar(true);
+    }, 3000);
 });

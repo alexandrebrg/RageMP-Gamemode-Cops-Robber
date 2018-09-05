@@ -2,7 +2,7 @@ const scaleForm = require('/gamemode/modules/lib/scaleForm');
 const camerasManager = require('/gamemode/modules/lib/camerasManager')
 let IsInCamSystem = false;
 
-let CamSystemScaleForm = new scaleForm("security_cam");
+let CamSystemScaleForm = new scaleForm("traffic_cam");
 let CamSystemIntruct = new scaleForm("instructional_buttons");
 let CamSystemActual  = 0;
 let camData = {};
@@ -24,8 +24,9 @@ mp.events.add({
     "initCamSystem": (camDatas) => {
 
         // Security Cam
-        CamSystemScaleForm.callFunction("SET_LOCATION", camDatas.areaname)
-        CamSystemScaleForm.callFunction("SET_TIME", 13,13);
+        CamSystemScaleForm.callFunction("SET_LAT_LONG", 27, 07, 14, 23)
+        CamSystemScaleForm.callFunction("SET_CAM_DATE", 2, 16, 15);
+        CamSystemScaleForm.callFunction("PLAY_CAM_MOVIE");
         camData = camDatas.cameras;
 
         // Instructionals

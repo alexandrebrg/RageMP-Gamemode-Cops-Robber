@@ -57,3 +57,6 @@
 ## :star: New Update
   - New civil vehicle system (Fixing bugs aswell)
   - New Marker / Blip / colshape library
+  - Adding a Camera System
+  - Optimisation of markers
+  - Action is launched as soon as a player enters in a marker

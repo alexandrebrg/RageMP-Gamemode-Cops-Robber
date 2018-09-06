@@ -96,7 +96,8 @@ module.exports.Init =  function() {
         posy float NOT NULL,
         posz float NOT NULL,
         angle float NOT NULL,
-        faction_id int(11) NOT NULL
+        faction_id int(11) NOT NULL,
+        dimension INT NOT NULL DEFAULT 0
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;`, function() { } );
     DB.Handle.query("ALTER TABLE `server_spawnpoints` ADD PRIMARY KEY (`id`);", function() { } );
     DB.Handle.query("ALTER TABLE `server_spawnpoints` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;", function() { } );

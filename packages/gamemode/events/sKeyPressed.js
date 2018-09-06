@@ -6,24 +6,9 @@ const Ammunation = require('../data/ammunation.json');
 module.exports = {
     "sKeyPressed" : (player, key) => {
         if(key === "Y") {
-
             let done = false;
             mp.markers.forEachInRange(player.position, 3, (b) => {
-                if(b.store && !b.robbed) {
-                    switch(b.storeType) {
-                        case 1:
-                            player.call("247choice", [b.sqlid]);
-                            break;
-                        case 2:
-                            player.call("AMMUNATIONchoice", [b.sqlid, JSON.stringify(Ammunation[b.sqlid])]);
-                            break;
-                    }
-                    return false;
-                }
-                else if(b.store && b.robbed) {
-                    player.notify(PM.StoreAlreadyRobbed);
-                }
-                else if(b.teleporter && b.dimension === player.dimension && !done) {
+                if(b.teleporter && b.dimension === player.dimension && !done) {
                     if(b.faction !== 1 && Players.PlayerHaveAccess(player.ID, b.faction) && !player.adminID) return player.notify(PM.AccessTP)
                     player.call("fadeOut");
                     setTimeout(function() {
@@ -46,22 +31,37 @@ module.exports = {
 
                     done = true;
                     return false;
-                } else if(b.arrest) {
-                    mp.players.forEachInRange(player.position, 5, (p2) => {
-                        if(Players.isPlayerCuffed(p2.ID) && Factions.isFactionCops(Players.getPlayerFaction(player.ID))) {
-                            mp.events.call("PutPlayerInJail", player, p2);
-                        }
-                    });
-                } else if(b.atm) {
-                    player.call("ATMChoice", [b.id]);
-                } else if(b.custom) {
-                    mp.events.call("showVehicleCustom", player, b.customID);
-                } else if(b.carShop){                         
-                    mp.events.call("showVehicleShop", player, b.carShopType);
                 } else if(b.reseller) {
                     mp.events.call("resellCar", player);
                 }
             });
+        }
+    },
+    "colshapeATMMenu": (player, markerID) => player.call("ATMChoice", [markerID]),
+    "colshapeVehicleCustom": (player, markerID) => mp.events.call("showVehicleCustom", player, mp.markers[markerID].customID),
+    "colshapeVehicleShop": (player, markerID) => mp.events.call("showVehicleShop", player, mp.markers[markerID].carShopType),
+    "colshapeArrest": (player, markerID) => { 
+        mp.players.forEachInRange(player.position, 10, (p2) => {
+            if(Players.isPlayerCuffed(p2.ID) && Factions.isFactionCops(Players.getPlayerFaction(player.ID))) {
+                mp.events.call("PutPlayerInJail", player, p2);
+            }
+        });
+    },
+    "colshapeStore": (player, markerID) => {
+        let b = mp.markers[markerID];
+        if(b.store && !b.robbed) {
+            switch(b.storeType) {
+                case 1:
+                    player.call("247choice", [b.sqlid]);
+                    break;
+                case 2:
+                    player.call("AMMUNATIONchoice", [b.sqlid, JSON.stringify(Ammunation[b.sqlid])]);
+                    break;
+            }
+            return false;
+        }
+        else if(b.store && b.robbed) {
+            player.notify(PM.StoreAlreadyRobbed);
         }
     }
 };

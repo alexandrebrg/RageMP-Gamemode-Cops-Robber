@@ -1,5 +1,6 @@
 const DB = require('./db');
 const config = require('../data/config');
+const GamePOI = require('../modules/gamepoi')
 
 let Bizs = [];
 
@@ -44,20 +45,11 @@ const Biz = function(id, type, name, posx, posy, posz, dimension) {
         dimension: dimension,
         drawDistance: 50
     });
-    this.pos = new mp.Vector3(posx, posy, posz-2);
-    this.marker = mp.markers.new(1, this.pos, 3, {
-        dimension: dimension,
-        color: this.color,
-        visible: true
-    });
-    this.marker.sqlid = id;
     this.label.sqlid = id;
-    this.marker.store = true;
-    this.marker.storeType = type;
-    this.blip = mp.blips.new(blipID, this.pos, {
-        name: this.nameNotColored,
-        dimension: dimension
-    });
+    this.marker = new GamePOI(new mp.Vector3(posx, posy, posz), 2, {store: true, storeType: type, sqlid: id});
+    this.marker.createMarker(1);
+    this.marker.createColshape("circle", true, "colshapeStore");
+    this.marker.createBlip(blipID, 0, this.nameNotColored);
 }
 
 function setRobbed(id) {

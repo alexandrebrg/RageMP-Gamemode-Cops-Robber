@@ -18,7 +18,6 @@ module.exports = {
                 player.armor = 100;
                 break;
         }
-        player.dimension = Config.defaultDimension;
         player.call('cFactionSelectionDone');
         setTimeout(() => {
             mp.events.call("sCashInit", player, Players.getPlayerCash(player.ID));
@@ -27,6 +26,7 @@ module.exports = {
             player.position = new mp.Vector3(spawnpoint['posx'], spawnpoint['posy'], spawnpoint['posz']);
             player.heading = spawnpoint['angle'];
             player.model =ped.hash;
+            player.dimension = spawnpoint.dimension;
 
             player.call('setWantedLevel', [Players.getPlayerWantedLevel(player.ID)]);
 

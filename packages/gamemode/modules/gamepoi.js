@@ -24,7 +24,7 @@ class GamePOI {
     /**
      * Create colshape
      */
-    createColshape(shape, autoActivate = false, ...args) {
+    createColshape(shape, autoActivate = false, action, ...args) {
         this.colshapeShape = shape;
         switch(shape) {
             case "sphere":
@@ -51,6 +51,9 @@ class GamePOI {
             this.colshape[obj] = this.options[obj];
         }
         this.colshape.autoActivate = autoActivate;
+        this.colshape.action = action;
+        if(this.marker)
+            this.colshape.markerID = this.marker.id;
     }
 
     /**
@@ -72,5 +75,7 @@ class GamePOI {
 module.exports = GamePOI;
 
 mp.events.add("playerEnterColshape", (player, shape) => {
-    mp.events.call("sKeyPressed", player, "Y");
-})
+    player.colshapeTimeout = setTimeout(() => player.colshapeTimeout = false, 5000);
+    if(shape.autoActivate && !player.colshapeTimeout) 
+        return mp.events.call(shape.action, player, shape.markerID);
+});

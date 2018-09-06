@@ -22,6 +22,8 @@ require ('./gamemode/modules/cPlayer.js');
 
 require ('./gamemode/modules/cCop.js');
 
+require ('./gamemode/modules/cCamSystem.js')
+
 require ('./gamemode/modules/cVehicle.js');
 
 require ('./gamemode/modules/cFactionSelection.js');

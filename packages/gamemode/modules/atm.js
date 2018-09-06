@@ -8,7 +8,7 @@ let ATMs = [];
 const ATM = function(pos) {
     let item = new GamePOI(pos, 1, {atm: true});
     item.createMarker(1, {dimension: Config.defaultDimension, color:[7,155,9,125]});
-    item.createColshape("circle", true);
+    item.createColshape("circle", true, "colshapeATMMenu");
     item.createBlip(207, 52, "ATM");
     return item;
 }

@@ -23,6 +23,7 @@
     "MustNotBeWanted": "~r~(!) ~w~You must be not wanted to kill yourself!",
     "RobberyInterrupted": "~r~(!) ~w~Robbery interrupted",
     "RobberyInProgress": "A robbery is in progress, need anybody here!",
+    "RobberyDone": "~o~Robbed! ~w~You successfuly robbed this store!",
     "PlayerIsCopRob": "~r~You can't rob, you are a cop!",
     "StoreAlreadyRobbed": "~r~(!) ~w~Store already robbed, wait some time!",
     "PlayerDead":{

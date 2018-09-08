@@ -4,6 +4,17 @@
     "maxATMCashHack": 10000,
     "storeType1Time": 60,
     "storeType2Time": 120,
+    "storeType": [
+      {},
+      {
+        "timeLeft": 60,
+        "wantedlevel": 1
+      },
+      {
+        "timeLeft":120,
+        "wantedlevel":2
+      }
+    ],
     "storeCashPerSecond": 200,
     "Jobs": {
         "0": {"name":"Hacker", "description":"Hack stuff, hack the city", "badge": 4, "sqlfield": "hacker"},
